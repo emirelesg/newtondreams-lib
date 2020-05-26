@@ -30,7 +30,9 @@ export default class World {
      * channel. This is done to optimize the framerate.
      * @type {object}
      */
-    this.canvas = document.createElement('canvas', { alpha: false });
+    this.canvas =
+      document.querySelector(`${utils.fixId(id)} canvas`) ||
+      document.createElement('canvas', { alpha: false });
 
     /**
      * Context of the created canvas for the world.
@@ -366,15 +368,17 @@ export default class World {
    * @private
    */
   resize() {
-    this.width = this.container.width();
-    const widthChange = Math.abs(this.prevWidth - this.width);
+    // Make the canvas take the full size of its container.
+    this.canvas.style.width = '100%';
+    this.canvas.style.height = '100%';
+    const { width, height } = this.canvas.getBoundingClientRect();
     this.prevWidth = this.width;
-    this.height = this.container.height();
+    this.width = width;
+    this.height = height;
     this.pxRatio = utils.getPixelRatio(this.ctx);
     this.canvas.width = Math.floor(this.width * this.pxRatio);
     this.canvas.height = Math.floor(this.height * this.pxRatio);
-    this.canvas.style.width = `${this.width}px`;
-    this.canvas.style.height = `${this.height}px`;
+
     this.ctx.scale(this.pxRatio, this.pxRatio);
     if (this.background.enabled) {
       this.background.resize();
@@ -383,6 +387,7 @@ export default class World {
       if (utils.isFunction(this.elements[i].resize)) this.elements[i].resize();
       if (this.elements[i].renderer) this.elements[i].renderer.resize();
     }
+    const widthChange = Math.abs(this.prevWidth - this.width);
     if (this.started && utils.isFunction(this.onResize) && widthChange > 0)
       this.onResize();
   }
