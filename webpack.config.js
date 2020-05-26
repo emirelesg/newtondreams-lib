@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './src/app.js',
+  entry: './src/expose.js',
   output: {
     filename: 'newton.bundle.js'
   },
