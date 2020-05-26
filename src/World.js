@@ -488,7 +488,7 @@ export default class World {
     if (this.started === null && utils.isFunction(this.onResize)) {
       this.onResize();
     }
-    this.started = requestAnimationFrame(() => {
+    this.started = window.requestAnimationFrame(() => {
       self.draw();
     });
   }
