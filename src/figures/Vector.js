@@ -158,7 +158,7 @@ export default class Vector extends WorldElement {
         true
       );
     }
-    let [_, angle] = this.drawLine(fromX, fromY, toX, toY, this.color, false);
+    let [, angle] = this.drawLine(fromX, fromY, toX, toY, this.color, false);
     if (this.label != '') {
       // Draw the label at the tip of the vector.
       this.font.toCtx(ctx);

@@ -1,7 +1,7 @@
 import * as utils from '../../Utils';
 import * as constants from '../../Constants';
 import WorldElement from '../../WorldElement';
-import Box from '../Box';
+// import Box from '../Box';
 
 /**
  * A Label Box allows for a pair of label and value to be displayed. It is often used to display results.

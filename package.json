@@ -2,7 +2,7 @@
   "name": "newton-lib",
   "version": "1.0.0",
   "description": "",
-  "main": ".src/app.js",
+  "main": "./src/module.js",
   "scripts": {
     "lint": "eslint",
     "build": "webpack --mode=production"
@@ -13,6 +13,7 @@
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
+    "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "eslint": "^7.1.0",
     "eslint-config-prettier": "^6.11.0",

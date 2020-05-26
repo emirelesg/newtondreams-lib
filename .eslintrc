@@ -2,14 +2,13 @@
   "env": {
     // "node": true,
     "browser": true,
-    "jquery": true,
-    "es6": true
+    "jquery": true
   },
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "extends": ["prettier"],
+  "extends": ["eslint:recommended", "prettier"],
   "rules": {
     "prettier/prettier": [
       "error", {

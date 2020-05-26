@@ -1,5 +1,5 @@
 import * as utils from './Utils';
-import World from './World';
+// import World from './World';
 
 /**
  * Enables an element to be prerendered in a hidden canvas. Once an element is prerendered it can be drawn to the main canvas faster.

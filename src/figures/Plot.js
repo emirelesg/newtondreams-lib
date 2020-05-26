@@ -207,11 +207,11 @@ export default class Plot extends WorldElement {
    * @private
    */
   drawShade(p) {
-    const { scaleX, scaleY, ctx } = this.world;
+    const { ctx } = this.world;
     ctx.beginPath();
     ctx.fillStyle = this.shadeColor;
     let disconnected = false;
-    p.forEach(([x, y, px, py, isVisible], i) => {
+    p.forEach(([, , px, py, isVisible], i) => {
       if (this.drawInvisiblePoints || isVisible) {
         if (i === 0 || disconnected) {
           ctx.moveTo(px, 0);
@@ -236,13 +236,13 @@ export default class Plot extends WorldElement {
    * @private
    */
   drawPlot(p) {
-    const { scaleX, scaleY, ctx } = this.world;
+    const { ctx } = this.world;
     const prevLineWidth = ctx.lineWidth;
     ctx.beginPath();
     ctx.lineWidth = this.lineWidth;
     ctx.strokeStyle = this.color;
     let disconnected = false;
-    p.forEach(([x, y, px, py, isVisible], i) => {
+    p.forEach(([, , px, py, isVisible], i) => {
       if (this.style === 'line') {
         if (this.drawInvisiblePoints || isVisible) {
           if (i === 0 || disconnected) {

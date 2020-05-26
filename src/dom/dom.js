@@ -175,7 +175,7 @@ export class Input extends DOMElement {
     this.set(this.default);
 
     // Callback whenever the input is changed by the user.
-    this.obj.on('input', (e) => {
+    this.obj.on('input', () => {
       const rawValue = this.obj.val();
       if (this.isNumber) {
         if (rawValue === '') {

@@ -3,7 +3,7 @@ import * as constants from './Constants';
 import Scale from './Scale';
 import Axis from './figures/Axis';
 import Renderer from './Renderer';
-import WorldElement from './WorldElement';
+// import WorldElement from './WorldElement';
 
 /**
  * The World class handles the canvas and the drawing of elements. It manages all touch and mouse events,
@@ -365,7 +365,7 @@ export default class World {
    * as all rendered canvases and their elements. It calls the callback function {@link World.onResize}.
    * @private
    */
-  resize(e) {
+  resize() {
     this.width = this.container.width();
     const widthChange = Math.abs(this.prevWidth - this.width);
     this.prevWidth = this.width;
