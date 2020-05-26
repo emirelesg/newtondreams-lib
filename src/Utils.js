@@ -3,20 +3,22 @@ import * as constants from './Constants';
 /**
  * Obtains the pixel ratio of the device. Used to scale properly the canvas for high resolution devices.
  * @public
- * @param {object} ctx Canvas context object.
  * @returns {number} The pixel ratio of the device.
  */
-export function getPixelRatio(ctx) {
-  const devicePixelRatio = window.devicePixelRatio || 1;
-  const backingStoreRatio =
-    ctx.webkitBackingStorePixelRatio ||
-    ctx.mozBackingStorePixelRatio ||
-    ctx.msBackingStorePixelRatio ||
-    ctx.oBackingStorePixelRatio ||
-    ctx.backingStorePixelRatio ||
-    1;
-  return devicePixelRatio / backingStoreRatio;
+export function getPixelRatio() {
+  return window.devicePixelRatio || 1;
 }
+// export function getPixelRatio(ctx) {
+//   const devicePixelRatio = window.devicePixelRatio || 1;
+//   const backingStoreRatio =
+//     ctx.webkitBackingStorePixelRatio ||
+//     ctx.mozBackingStorePixelRatio ||
+//     ctx.msBackingStorePixelRatio ||
+//     ctx.oBackingStorePixelRatio ||
+//     ctx.backingStorePixelRatio ||
+//     1;
+//   return devicePixelRatio / backingStoreRatio;
+// }
 
 /**
  * Makes sure that a HTML id allways has a # at the beginning.
