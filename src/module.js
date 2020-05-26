@@ -11,7 +11,7 @@ import Plot from './figures/Plot';
 import Box from './figures/Box';
 import DataCursor from './figures/DataCursor';
 
-const p$ = {
+export default {
   ...constants,
   Box,
   Ball,
@@ -25,5 +25,3 @@ const p$ = {
   utils,
   dom
 };
-
-export default p$;
