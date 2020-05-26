@@ -355,11 +355,14 @@ export class Options {
    */
   select(value) {
     this.value = value;
+    // prettier-ignore
     this.obj.each(function () {
       if ($(this).val() === value) {
+        // prettier-ignore
         $(this).parent().addClass('active');
         $(this).prop('checked', true);
       } else {
+        // prettier-ignore
         $(this).parent().removeClass('active');
         $(this).prop('checked', false);
       }

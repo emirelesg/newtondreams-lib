@@ -11,7 +11,7 @@
   "extends": ["eslint:recommended", "prettier"],
   "rules": {
     "prettier/prettier": [
-      "error", {
+      "warn", {
         "singleQuote": true,
         "printWidth": 80,
         "tabWidth": 2,

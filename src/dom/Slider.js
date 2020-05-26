@@ -151,6 +151,7 @@ export default class Slider {
     // Create a clone of the input. It must be initially hidden.
     let cloneId = `${this.label.prop('id')}_editable`;
     let cloneObj = this.label.clone();
+    // prettier-ignore
     cloneObj.prop('id', cloneId).prop('readonly', false).addClass('d-none');
     this.label.after(cloneObj);
 
