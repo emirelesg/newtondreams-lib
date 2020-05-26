@@ -140,7 +140,7 @@ export default class Slider {
     });
 
     // Configure the callback for when the slider changes value.
-    this.slider.noUiSlider.on('slide', (values) => {
+    this.slider.noUiSlider.on('slide', values => {
       self.value = utils.round(values[0], self.decPlaces);
       self.setLabel(values[0]);
       if (utils.isFunction(self.callback)) {

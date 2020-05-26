@@ -261,8 +261,8 @@ export default class World {
       if (this.elements[i].elements) {
         // Iterate though all elements and find those with click callbacks.
         this.elements[i].elements
-          .filter((e) => e.onClick)
-          .forEach((e) => {
+          .filter(e => e.onClick)
+          .forEach(e => {
             if (utils.isFunction(e.isMouseOver)) {
               e.mouseOver = e.isMouseOver();
               overElement = overElement || e.mouseOver;

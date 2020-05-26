@@ -194,7 +194,7 @@ export default class Plot extends WorldElement {
   getPoints() {
     return this.points
       .filter((_, idx) => idx < this.maxIdx())
-      .map((p) => {
+      .map(p => {
         const px = p[0] * this.world.scaleX.toPx;
         const py = p[1] * this.world.scaleY.toPx;
         return [...p, px, py, this.world.axis.isPointVisible(px, py)];
@@ -273,7 +273,7 @@ export default class Plot extends WorldElement {
   drawMarkers() {
     const { scaleX, scaleY, ctx } = this.world;
     this.font.set({ baseline: 'middle' });
-    this.markers.forEach((m) => {
+    this.markers.forEach(m => {
       // Draw marker circles.
       const px = m.x * scaleX.toPx;
       const py = m.y * scaleY.toPx;

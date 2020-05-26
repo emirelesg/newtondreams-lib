@@ -335,9 +335,7 @@ export default class Graph extends WorldElement {
 
     // Draw legends.
     if (this.legends_enabled) {
-      const enabledPlots = this.plots.filter(
-        (p) => p.display && p.label !== ''
-      );
+      const enabledPlots = this.plots.filter(p => p.display && p.label !== '');
       const legendSpace = this.width / enabledPlots.length;
       enabledPlots.forEach((plot, i) => {
         ctx.beginPath();
@@ -400,7 +398,7 @@ export default class Graph extends WorldElement {
     this.axis.draw();
 
     // Draw plots.
-    this.plots.forEach((plot) => {
+    this.plots.forEach(plot => {
       if (plot.display) plot.draw();
     });
   }

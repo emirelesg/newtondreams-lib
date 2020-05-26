@@ -203,7 +203,7 @@ export class Input extends DOMElement {
     });
 
     // When the user presses enter, focusout.
-    this.obj.on('keyup', (e) => {
+    this.obj.on('keyup', e => {
       if (e.keyCode === 13) {
         this.obj.blur();
       }

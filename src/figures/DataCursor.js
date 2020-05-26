@@ -87,7 +87,7 @@ export default class DataCursor extends WorldElement {
    * @param  {...Plot} Plots to be added.
    */
   add(...args) {
-    args.forEach((obj) => {
+    args.forEach(obj => {
       if (obj instanceof Plot && this.plots.indexOf(obj) < 0) {
         this.plots.push(obj);
       }
@@ -100,7 +100,7 @@ export default class DataCursor extends WorldElement {
    * @param  {...Plot} Plots to be removed.
    */
   remove(...args) {
-    args.forEach((obj) => {
+    args.forEach(obj => {
       if (this.plots.indexOf(obj)) {
         this.plots.splice(this.plots.indexOf(obj), 1);
       }
@@ -180,8 +180,8 @@ export default class DataCursor extends WorldElement {
   isMouseOver() {
     // Get the closest point from every plot, and then sort them by increasing distance.
     let closestPoints = this.plots
-      .filter((plot) => plot.display)
-      .map((plot) => this.isMouseOverPlot(plot))
+      .filter(plot => plot.display)
+      .map(plot => this.isMouseOverPlot(plot))
       .sort((a, b) => a.distance - b.distance);
     if (closestPoints.length && closestPoints[0].distance < Infinity) {
       this.closest = closestPoints[0];
