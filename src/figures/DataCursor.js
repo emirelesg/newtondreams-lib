@@ -94,7 +94,7 @@ export default class DataCursor extends WorldElement {
     });
   }
 
-  /**
+  /*
    * Removes the data cursor from a Plot.
    * @public
    * @param  {...Plot} Plots to be removed.
