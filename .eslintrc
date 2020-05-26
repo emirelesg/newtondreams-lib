@@ -1,6 +1,6 @@
 {
   "env": {
-    // "node": true,
+    "es6": true,
     "browser": true,
     "jquery": true
   },
@@ -8,7 +8,10 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "extends": ["eslint:recommended", "prettier"],
+  "extends": [
+    "eslint:recommended", 
+    "plugin:prettier/recommended"
+  ],
   "rules": {
     "prettier/prettier": [
       "warn", {
@@ -24,6 +27,6 @@
       "avoidEscape": true,
       "allowTemplateLiterals": true
     }]
-  },
-  "plugins": ["prettier"]
+  }
+  // "plugins": ["prettier"]
 }
