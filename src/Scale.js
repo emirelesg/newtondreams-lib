@@ -1,12 +1,11 @@
-import * as utils from "./Utils";
+import * as utils from './Utils';
 
- /**
-  * Stores the scale properties in a particular axis (-x or -y).
-  * @public
-  * @class Scale
-  */
+/**
+ * Stores the scale properties in a particular axis (-x or -y).
+ * @public
+ * @class Scale
+ */
 export default class Scale {
-  
   /**
    * @constructor
    * @param {number} px Number of pixels that one magnitude value is equivalent.
@@ -14,7 +13,6 @@ export default class Scale {
    * @param {string} [unit=""] Unit of the scale.
    */
   constructor(px, mag, unit) {
-
     /**
      * Number of pixels that one magnitude value is equivalent.
      * Default value is 0.
@@ -34,8 +32,8 @@ export default class Scale {
      * Default value is "".
      * @type {string}
      */
-    this.unit = "";
-    
+    this.unit = '';
+
     /**
      * Conversion factor from units to pixels.
      * Default value is 0.
@@ -44,7 +42,7 @@ export default class Scale {
      * var pixels = units * scale.toPixels;
      */
     this.toPx = 0;
-    
+
     /**
      * Conversion factor from pixels to units.
      * Default value is 0.
@@ -53,10 +51,9 @@ export default class Scale {
      * var units = pixels * scale.toUnits;
      */
     this.toUnits = 0;
-    
+
     // Apply user settings.
     this.set(px, mag, unit);
-
   }
 
   /**
@@ -69,7 +66,7 @@ export default class Scale {
   set(px, mag, unit) {
     this.px = px;
     this.mag = mag;
-    this.unit = utils.isString(unit) ? unit : "";
+    this.unit = utils.isString(unit) ? unit : '';
     this.toPx = this.px / this.mag;
     this.toUnits = this.mag / this.px;
   }

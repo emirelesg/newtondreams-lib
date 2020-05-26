@@ -1,5 +1,5 @@
-import * as utils from "../Utils";
-import WorldElement from "../WorldElement";
+import * as utils from '../Utils';
+import WorldElement from '../WorldElement';
 
 /**
  * The Picture class is used to draw images on the screen. Extra attention must be made when waiting
@@ -8,14 +8,12 @@ import WorldElement from "../WorldElement";
  * @class Picture
  */
 export default class Picture extends WorldElement {
-
   /**
    * @constructor
    * @param {string} path Path for the image.
    * @param {object} [opts] Object that contains valid Picture properties with values. Their values will be assigned at the end of the constructor. If an invalid property is passed then the value will be ignored.
    */
   constructor(path, opts) {
-
     // Extend WorldElement.
     super();
 
@@ -35,7 +33,8 @@ export default class Picture extends WorldElement {
      * Flag for allowing the picture to be dragged around.
      * Default value is true.
      * @type {boolean}
-     */ 
+     */
+
     this.isDraggable = true;
 
     /**
@@ -68,7 +67,6 @@ export default class Picture extends WorldElement {
 
     // Apply user settings.
     utils.loadOptions(this, opts);
-
   }
 
   /**
@@ -101,7 +99,6 @@ export default class Picture extends WorldElement {
    * @private
    */
   draw() {
-
     const { scaleX, scaleY, ctx } = this.world;
     const w = Math.floor(this.img.width * this.scale);
     const h = Math.floor(this.img.height * this.scale);
@@ -128,6 +125,5 @@ export default class Picture extends WorldElement {
         h
       );
     }
-    
   }
 }

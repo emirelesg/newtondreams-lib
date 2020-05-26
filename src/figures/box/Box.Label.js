@@ -1,7 +1,7 @@
-import * as utils from "../../Utils";
-import * as constants from "../../Constants";
-import WorldElement from "../../WorldElement";
-import Box from "../Box";
+import * as utils from '../../Utils';
+import * as constants from '../../Constants';
+import WorldElement from '../../WorldElement';
+import Box from '../Box';
 
 /**
  * A Label Box allows for a pair of label and value to be displayed. It is often used to display results.
@@ -10,7 +10,6 @@ import Box from "../Box";
  * @class Label
  */
 export default class Label extends WorldElement {
-
   /**
    * @constructor
    * @param {Box} box Parent box.
@@ -19,7 +18,6 @@ export default class Label extends WorldElement {
    * @param {object} [opts] Object that contains valid Text properties with values. Their values will be assigned at the end of the constructor. If an invalid property is passed then the value will be ignored.
    */
   constructor(box, width, height, opts) {
-
     // Extend WorldElement.
     super();
 
@@ -56,21 +54,21 @@ export default class Label extends WorldElement {
      * Default value is "".
      * @type {string}
      */
-    this.name = "";
+    this.name = '';
 
     /**
-     * Sets the formated value for the label. 
+     * Sets the formated value for the label.
      * This is the value that is displayed along the name.
      * @type {string}
      */
-    this.value = "";
+    this.value = '';
 
     /**
      * Sets the units that the value will use.
      * Default value is "".
      * @type {string}
      */
-    this.units = "";
+    this.units = '';
 
     /**
      * Flag for automatically using the (k)ilo, (M)ega, (G)iga prefixes in order to shorten
@@ -109,15 +107,14 @@ export default class Label extends WorldElement {
 
     // Configure font settings for the label.
     this.font.set({
-      align: "left",
+      align: 'left',
       size: 14,
-      baseline: "middle",
+      baseline: 'middle',
       color: constants.COLORS.GRAY
     });
 
     // Apply user settings.
     utils.loadOptions(this, opts);
-
   }
 
   /**
@@ -129,8 +126,14 @@ export default class Label extends WorldElement {
     return utils.isCoordInside(
       this.box.world.mouse.x,
       this.box.world.mouse.y,
-      this.box.position.x + this.box.padding.top + this.position.x + this.width / 2,
-      this.box.position.y + this.box.padding.left + this.position.y + this.height / 2,
+      this.box.position.x +
+        this.box.padding.top +
+        this.position.x +
+        this.width / 2,
+      this.box.position.y +
+        this.box.padding.left +
+        this.position.y +
+        this.height / 2,
       this.width / 2,
       this.height / 2
     );

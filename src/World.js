@@ -1,9 +1,9 @@
-import * as utils from "./Utils";
-import * as constants from "./Constants";
-import Scale from "./Scale";
-import Axis from "./figures/Axis";
-import Renderer from "./Renderer";
-import WorldElement from "./WorldElement";
+import * as utils from './Utils';
+import * as constants from './Constants';
+import Scale from './Scale';
+import Axis from './figures/Axis';
+import Renderer from './Renderer';
+import WorldElement from './WorldElement';
 
 /**
  * The World class handles the canvas and the drawing of elements. It manages all touch and mouse events,
@@ -12,7 +12,6 @@ import WorldElement from "./WorldElement";
  * @class World
  */
 export default class World {
-
   /**
    * @constructor
    * @param {string} id HTML id of the div where the World will be initiated.
@@ -20,7 +19,6 @@ export default class World {
    * @param {function} resizeCallback Function called every time the canvas gets resized.
    */
   constructor(id, drawCallback, resizeCallback) {
-
     /**
      * jQuery reference to the div container of the canvas.
      * @type {object}
@@ -32,13 +30,13 @@ export default class World {
      * channel. This is done to optimize the framerate.
      * @type {object}
      */
-    this.canvas = document.createElement("canvas", { alpha: false });
+    this.canvas = document.createElement('canvas', { alpha: false });
 
     /**
      * Context of the created canvas for the world.
      * @type {object}
      */
-    this.ctx = this.canvas.getContext("2d");
+    this.ctx = this.canvas.getContext('2d');
 
     /**
      * Pixel ratio of the device.
@@ -158,7 +156,7 @@ export default class World {
     };
 
     /**
-     * Background renderer object. It is disabled by default. 
+     * Background renderer object. It is disabled by default.
      * @type {Renderer}
      */
     this.background = new Renderer({
@@ -176,12 +174,11 @@ export default class World {
     // Bind all events to the canvas and force a resize event.
     this.bindEventListeners();
     this.resize();
-
   }
 
   /**
    * Once it has been determined that the mouse is over an element and a dragging process has begun,
-   * the position of the object must be updated to follow the mouse. The function looks at the value of 
+   * the position of the object must be updated to follow the mouse. The function looks at the value of
    * {@link WorldElement.mouseMoveStyle} to determine if the position should be updated in pixels or in
    * real values. The position is updated by adding the change in the mouse's position to the element.
    * This creates a smoother movement. Finally, the callback function {@link WorldElement.onMouseMove} is
@@ -260,13 +257,12 @@ export default class World {
     let found = constants.OVER_NOTHING;
     let overElement = false;
     for (let i = this.elements.length - 1; i >= 0; i -= 1) {
-
       // A Box has multiple elements inside that can be clickable.
       if (this.elements[i].elements) {
         // Iterate though all elements and find those with click callbacks.
         this.elements[i].elements
-          .filter(e => e.onClick)
-          .forEach(e => {
+          .filter((e) => e.onClick)
+          .forEach((e) => {
             if (utils.isFunction(e.isMouseOver)) {
               e.mouseOver = e.isMouseOver();
               overElement = overElement || e.mouseOver;
@@ -353,15 +349,15 @@ export default class World {
         self.resize(e);
       }
     };
-    window.addEventListener("resize", callbacks.resize, false);
-    window.addEventListener("mouseup", callbacks.mouseup, false);
-    this.canvas.addEventListener("mousemove", callbacks.mousemove, false);
-    this.canvas.addEventListener("mouseenter", callbacks.mouseenter, false);
-    this.canvas.addEventListener("mouseleave", callbacks.mouseleave, false);
-    this.canvas.addEventListener("mousedown", callbacks.mousedown, false);
-    this.canvas.addEventListener("touchmove", callbacks.mousemove, false);
-    this.canvas.addEventListener("touchstart", callbacks.touchstart, false);
-    this.canvas.addEventListener("touchend", callbacks.touchend, false);
+    window.addEventListener('resize', callbacks.resize, false);
+    window.addEventListener('mouseup', callbacks.mouseup, false);
+    this.canvas.addEventListener('mousemove', callbacks.mousemove, false);
+    this.canvas.addEventListener('mouseenter', callbacks.mouseenter, false);
+    this.canvas.addEventListener('mouseleave', callbacks.mouseleave, false);
+    this.canvas.addEventListener('mousedown', callbacks.mousedown, false);
+    this.canvas.addEventListener('touchmove', callbacks.mousemove, false);
+    this.canvas.addEventListener('touchstart', callbacks.touchstart, false);
+    this.canvas.addEventListener('touchend', callbacks.touchend, false);
   }
 
   /**
@@ -387,7 +383,8 @@ export default class World {
       if (utils.isFunction(this.elements[i].resize)) this.elements[i].resize();
       if (this.elements[i].renderer) this.elements[i].renderer.resize();
     }
-    if (this.started && utils.isFunction(this.onResize) && widthChange > 0) this.onResize();
+    if (this.started && utils.isFunction(this.onResize) && widthChange > 0)
+      this.onResize();
   }
 
   /**
@@ -413,8 +410,8 @@ export default class World {
    */
   draw() {
     this.onDraw();
-    this.ctx.lineCap = "round";
-    this.ctx.lineJoin = "round";
+    this.ctx.lineCap = 'round';
+    this.ctx.lineJoin = 'round';
     this.ctx.clearRect(0, 0, this.width, this.height);
 
     // Background.
@@ -457,7 +454,7 @@ export default class World {
     for (let i = 0; i < args.length; i++) {
       if (
         utils.isObject(args[i]) &&
-        Object.prototype.hasOwnProperty.call(args[i], "valid")
+        Object.prototype.hasOwnProperty.call(args[i], 'valid')
       ) {
         args[i].setWorld(this);
         if (args[i].renderer) args[i].renderer.setWorld(this);
@@ -498,14 +495,14 @@ export default class World {
 
   /**
    * Creates a screenshot of the canvas and saves it as sc.png in the same folder
-   * as the main file from the simulation. The canvas data is passed to a php file 
+   * as the main file from the simulation. The canvas data is passed to a php file
    * that only runs at localhost.
    * @public
    */
   export() {
     // Split url to get simulation path
     // /newtondreams-bs4/fisica/sim/
-    const urlArray = window.location.pathname.split("/");
+    const urlArray = window.location.pathname.split('/');
     const simType = urlArray[2];
     const simName = urlArray[3];
     $.ajax({
@@ -513,9 +510,9 @@ export default class World {
         data: this.canvas.toDataURL(),
         path: `/${simType}/${simName}/`
       },
-      url: "../../php/export.php",
-      dataType: "html",
-      type: "post",
+      url: '../../php/export.php',
+      dataType: 'html',
+      type: 'post',
       success(response) {
         console.log(response);
       }

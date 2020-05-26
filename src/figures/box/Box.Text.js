@@ -1,6 +1,6 @@
-import * as utils from "../../Utils";
-import * as constants from "../../Constants";
-import WorldElement from "../../WorldElement";
+import * as utils from '../../Utils';
+import * as constants from '../../Constants';
+import WorldElement from '../../WorldElement';
 
 /**
  * A Text Box allows for text to be displayed on a Box element. The text can be multiline
@@ -10,7 +10,6 @@ import WorldElement from "../../WorldElement";
  * @class Text
  */
 export default class Text extends WorldElement {
-
   /**
    * @constructor
    * @param {Box} box Parent box.
@@ -19,7 +18,6 @@ export default class Text extends WorldElement {
    * @param {object} [opts] Object that contains valid Text properties with values. Their values will be assigned at the end of the constructor. If an invalid property is passed then the value will be ignored.
    */
   constructor(box, width, height, opts) {
-
     // Extend WorldElement.
     super();
 
@@ -47,18 +45,17 @@ export default class Text extends WorldElement {
      * @type {string[]}
      */
     this.text = [];
-    
+
     // Configure font settings for the text.
     this.font.set({
-      align: "left",
+      align: 'left',
       size: 14,
-      baseline: "top",
+      baseline: 'top',
       color: constants.COLORS.GRAY
     });
 
     // Apply user settings.
     utils.loadOptions(this, opts);
-
   }
 
   /**
@@ -67,7 +64,7 @@ export default class Text extends WorldElement {
    * @param {string} rawText Text to be displayed.
    */
   setText(rawText) {
-    this.text = rawText.split("\n");
+    this.text = rawText.split('\n');
   }
 
   /**

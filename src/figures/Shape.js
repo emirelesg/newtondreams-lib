@@ -1,7 +1,7 @@
-import * as utils from "../Utils";
-import * as constants from "../Constants";
-import Renderer from "../Renderer";
-import WorldElement from "../WorldElement";
+import * as utils from '../Utils';
+import * as constants from '../Constants';
+import Renderer from '../Renderer';
+import WorldElement from '../WorldElement';
 
 /**
  * The Shape class is used to draw shapes manually onto the world. The class provides similar
@@ -11,14 +11,12 @@ import WorldElement from "../WorldElement";
  * @public
  */
 export default class Shape extends WorldElement {
-
   /**
    * @constructor
    * @param {function} onDraw Function where the drawing process occurs.
    * @param {object} [opts] Object that contains valid Shape properties with values. Their values will be assigned at the end of the constructor. If an invalid property is passed then the value will be ignored.
    */
   constructor(onDraw, opts) {
-
     // Extend WorldElement.
     super();
 
@@ -52,7 +50,7 @@ export default class Shape extends WorldElement {
     this.angleStyle = constants.ANGLE_STYLE.DEG;
 
     /**
-     * Sets if the coordinates are referenced to the previous coordinates given or are 
+     * Sets if the coordinates are referenced to the previous coordinates given or are
      * allways absolute.
      * Default value is {@link SHAPE_STYLE}.NONE.
      * @type {number}
@@ -79,10 +77,9 @@ export default class Shape extends WorldElement {
      * @type {Renderer}
      */
     this.renderer = new Renderer({ enabled: false });
-    
+
     // Apply user settings.
     utils.loadOptions(this, opts);
-
   }
 
   /**
@@ -147,7 +144,7 @@ export default class Shape extends WorldElement {
   }
 
   /**
-   * Sets the starting position of drawing path. The path must be then continued by 
+   * Sets the starting position of drawing path. The path must be then continued by
    * calling {@link Shape.lineTo}.
    * @public
    * @param {number} x0 Starting -x coordinate for the current drawing path.
@@ -485,7 +482,7 @@ export default class Shape extends WorldElement {
   /**
    * Draws a line on the world.
    * @public
-   * @param {number} x0 Start -x coordinate of the line. 
+   * @param {number} x0 Start -x coordinate of the line.
    * @param {number} y0 Start -y coordinate of the line.
    * @param {number} x1 End -x coordinate of the line.
    * @param {number} y1 End -y coordinate of the line.
@@ -524,7 +521,7 @@ export default class Shape extends WorldElement {
 
   /**
    * Draws an ellipse on the world.
-   * @public  
+   * @public
    * @param {number} x0 Center -x coordinate of the ellipse.
    * @param {number} y0 Center -y coordinate of the ellipse.
    * @param {number} w Width of the ellipse.

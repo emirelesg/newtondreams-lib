@@ -1,8 +1,8 @@
-import * as utils from "../Utils";
-import * as constants from "../Constants";
-import WorldElement from "../WorldElement";
-import Plot from "./Plot";
-import Graph from "./box/Box.Graph";
+import * as utils from '../Utils';
+import * as constants from '../Constants';
+import WorldElement from '../WorldElement';
+import Plot from './Plot';
+import Graph from './box/Box.Graph';
 
 /**
  * The DataCursor class is used to add data cursors to plots. It works with plots added to Graph and World objects.
@@ -10,15 +10,13 @@ import Graph from "./box/Box.Graph";
  * @class DataCursor
  */
 export default class DataCursor extends WorldElement {
-
   /**
    * @constructor
    * @param {object} [opts] Object that contains valid DataCursor properties with values. Their values will be assigned at the end of the constructor. If an invalid property is passed then the value will be ignored.
    */
   constructor(opts) {
-
     // Extend WorldElement.
-    super();    
+    super();
 
     /**
      * Updates the data cursor every frame.
@@ -74,14 +72,13 @@ export default class DataCursor extends WorldElement {
     // Sets the data cursor's font.
     this.font.set({
       size: 12,
-      baseline: "middle",
-      align: "center",
+      baseline: 'middle',
+      align: 'center',
       color: constants.COLORS.GRAY
     });
 
     // Apply user settings.
     utils.loadOptions(this, opts);
-
   }
 
   /*
@@ -94,8 +91,8 @@ export default class DataCursor extends WorldElement {
       if (obj instanceof Plot && this.plots.indexOf(obj) < 0) {
         this.plots.push(obj);
       }
-    })
-  } 
+    });
+  }
 
   /**
    * Removes the data cursor from a Plot.
@@ -107,15 +104,14 @@ export default class DataCursor extends WorldElement {
       if (this.plots.indexOf(obj)) {
         this.plots.splice(this.plots.indexOf(obj), 1);
       }
-    })
-  } 
+    });
+  }
 
   /**
    * Determines which is the closest point to the pointer.
    * @private
    */
   isMouseOverPlot(plot) {
-
     // Check if the plot is placed inside of a Graph object.
     const isInGraph = plot.world instanceof Graph;
 
@@ -126,25 +122,36 @@ export default class DataCursor extends WorldElement {
     let offsetX = plot.world.axis.position.x;
     let offsetY = plot.world.axis.position.y;
     if (isInGraph) {
-      offsetX += plot.world.box.position.x 
-        + plot.world.box.padding.left 
-        + plot.world.position.x 
-        + plot.world.padding.left;
-      offsetY += plot.world.box.position.y
-        + plot.world.box.padding.top 
-        + plot.world.position.y
-        + plot.world.padding.top;
+      offsetX +=
+        plot.world.box.position.x +
+        plot.world.box.padding.left +
+        plot.world.position.x +
+        plot.world.padding.left;
+      offsetY +=
+        plot.world.box.position.y +
+        plot.world.box.padding.top +
+        plot.world.position.y +
+        plot.world.padding.top;
     }
 
     // Iterate through all points in the plot and find the closest point.
-    let closestPoint = { distance: Infinity, px: 0, py: 0, label: '', color: '' };
+    let closestPoint = {
+      distance: Infinity,
+      px: 0,
+      py: 0,
+      label: '',
+      color: ''
+    };
     plot.getPoints().forEach(([x, y, px, py, isVisible]) => {
-
       // Only analyze points that are in view.
       if (isVisible) {
-
         // Compare the squared distance to the point.
-        const distance = utils.distSquared(mouse.x, mouse.y, px + offsetX, py + offsetY);
+        const distance = utils.distSquared(
+          mouse.x,
+          mouse.y,
+          px + offsetX,
+          py + offsetY
+        );
 
         // If point is closer to previous point...
         if (distance < closestPoint.distance && distance < 125) {
@@ -159,25 +166,23 @@ export default class DataCursor extends WorldElement {
           closestPoint.distance = distance;
           closestPoint.color = plot.color;
         }
-      }  
-
+      }
     });
 
     return closestPoint;
-
-  };
-    
+  }
 
   /**
    * Tests if the mouse is over any plot.
-   * @private 
+   * @private
    * @returns {boolean} Returns true if the pointer is over any plot.
    */
   isMouseOver() {
     // Get the closest point from every plot, and then sort them by increasing distance.
     let closestPoints = this.plots
-      .filter(plot => plot.display)
-      .map(plot => this.isMouseOverPlot(plot)).sort((a, b) => a.distance - b.distance);
+      .filter((plot) => plot.display)
+      .map((plot) => this.isMouseOverPlot(plot))
+      .sort((a, b) => a.distance - b.distance);
     if (closestPoints.length && closestPoints[0].distance < Infinity) {
       this.closest = closestPoints[0];
       return true;
@@ -198,7 +203,6 @@ export default class DataCursor extends WorldElement {
 
     // Only draw coordinates if mouse is over something.
     if (this.closest.distance < Infinity) {
-    
       // Move to the point.
       ctx.save();
       ctx.translate(this.closest.px, this.closest.py);
@@ -220,11 +224,11 @@ export default class DataCursor extends WorldElement {
       ctx.beginPath();
       ctx.fillStyle = this.color.BACKGROUND;
       ctx.strokeStyle = this.color.BORDER;
-      ctx.rect(-width/2, -height/2 - offsetHeight, width, height);
+      ctx.rect(-width / 2, -height / 2 - offsetHeight, width, height);
       ctx.stroke();
       ctx.fill();
       ctx.closePath();
-      
+
       // Draw text.
       ctx.beginPath();
       this.font.toCtx(ctx);
@@ -234,7 +238,5 @@ export default class DataCursor extends WorldElement {
 
       ctx.restore();
     }
-
   }
-
 }

@@ -1,6 +1,6 @@
-import * as utils from "../Utils";
-import * as constants from "../Constants";
-import WorldElement from "../WorldElement";
+import * as utils from '../Utils';
+import * as constants from '../Constants';
+import WorldElement from '../WorldElement';
 
 /**
  * The Vector class is used for handling vector quantities and for drawing them onto the world.
@@ -8,13 +8,11 @@ import WorldElement from "../WorldElement";
  * @class Vector
  */
 export default class Vector extends WorldElement {
-
   /**
-   * 
+   *
    * @param {object} [opts] Object that contains valid Vector properties with values. Their values will be assigned at the end of the constructor. If an invalid property is passed then the value will be ignored.
    */
   constructor(opts) {
-
     // Extend WorldElement.
     super();
 
@@ -68,7 +66,6 @@ export default class Vector extends WorldElement {
 
     // Apply user settings.
     utils.loadOptions(this, opts);
-
   }
 
   /**
@@ -103,7 +100,7 @@ export default class Vector extends WorldElement {
     const { ctx } = this.world;
     const dx = x1 - x0;
     const dy = y1 - y0;
-    const mag = Math.sqrt(dx ** 2 + dy ** 2);
+    const mag = Math.sqrt(dx * dx + dy * dy);
     const a1 = Math.atan2(dy, dx);
     const a2 = constants.FIFTH_PI;
     const headlen = mag > 10 ? 10 : mag;
@@ -136,7 +133,7 @@ export default class Vector extends WorldElement {
 
     return [mag, a1];
   }
-  
+
   /**
    * Main draw function for the vector called by the World automatically.
    * @private
@@ -165,7 +162,11 @@ export default class Vector extends WorldElement {
     if (this.label != '') {
       // Draw the label at the tip of the vector.
       this.font.toCtx(ctx);
-      ctx.fillText(this.label, toX + 10 * Math.cos(angle), toY + 10 * Math.sin(angle));
+      ctx.fillText(
+        this.label,
+        toX + 10 * Math.cos(angle),
+        toY + 10 * Math.sin(angle)
+      );
     }
     ctx.lineWidth = prevLineWidth;
   }
@@ -229,7 +230,7 @@ export default class Vector extends WorldElement {
     }
   }
 
- /**
+  /**
    * Multiply the -x and -y components of the vector by a constant value.
    * @public
    * @param {number|object} x Value that multiplies the -x component of the vector. If x is another vector, the components of this vector are multiplied with the target vector.
@@ -277,7 +278,7 @@ export default class Vector extends WorldElement {
    * @returns {number} The magnitude of the vector.
    */
   mag() {
-    return Math.sqrt(this.x ** 2 + this.y ** 2);
+    return Math.sqrt(this.x * this.x + this.y * this.y);
   }
 
   /**
@@ -310,6 +311,6 @@ export default class Vector extends WorldElement {
    * @returns {number} The magnitude squared of the vector.
    */
   magSquared() {
-    return this.x ** 2 + this.y ** 2;
+    return this.x * this.x + this.y * this.x;
   }
 }

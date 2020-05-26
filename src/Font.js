@@ -1,4 +1,4 @@
-import * as constants from "./Constants";
+import * as constants from './Constants';
 
 /**
  * Stores the font settings currently used by a World Element.
@@ -6,15 +6,13 @@ import * as constants from "./Constants";
  * @class Font
  */
 export default class Font {
-
   /**
    * @constructor
    * @param {object} [opts] Object that contains valid Font properties with values. Their values will be assigned at the end of the constructor. If an invalid property is passed then the value will be ignored.
    */
   constructor(opts) {
-
     /**
-     * Sets the font size in pixels. 
+     * Sets the font size in pixels.
      * Default value is {@link FONT_SIZE}.
      * @type {number|string}
      */
@@ -28,7 +26,7 @@ export default class Font {
     this.face = constants.FONT;
 
     /**
-     * Sets the font color in HEX format. 
+     * Sets the font color in HEX format.
      * Default value is {@link FONT_COLOR}.
      * @type {string}
      */
@@ -39,21 +37,21 @@ export default class Font {
      * Default value is middle.
      * @type {string}
      */
-    this.baseline = "middle";
+    this.baseline = 'middle';
 
     /**
      * Sets the alignment value for the text.
      * Default value is center.
      * @type {string}
      */
-    this.align = "center";
+    this.align = 'center';
 
     /**
      * Sets the font weight used. If the font face has different weights available, another value can be selected.
      * Default value is normal.
      * @type {string}
      */
-    this.weight = "normal";
+    this.weight = 'normal';
 
     /**
      * Sets the line spacing between text lines. The value is multiplied by the current font size.
@@ -88,7 +86,7 @@ export default class Font {
   /**
    * Checks if the provided baseline value is valid for a canvas element.
    * Valid baseline values include: "top", "hanging", "middle", "alphabetic", "ideographic", "bottom".
-   * @private 
+   * @private
    * @param {string} baseline Baseline value to check.
    * @throws {error} Error when the baseline value is invalid.
    * @returns {boolean} True if baseline value is valid.
@@ -99,11 +97,11 @@ export default class Font {
     }
     throw new Error(`${baseline} is not a valid baseline.`);
   }
-  
+
   /**
    * Checks if the provided align value is valid for a canvas element.
    * Valid align values: "left", "right", "center", "start", "end".
-   * @private 
+   * @private
    * @param {string} align Align value to check.
    * @throws {error} Error when the align value is invalid.
    * @returns {boolean} True if align value is valid.
@@ -114,14 +112,14 @@ export default class Font {
     }
     throw new Error(`${align} is not a valid text align.`);
   }
-  
+
   /**
    * Sets the current font settings to the context.
    * @private
    * @param {object} ctx Canvas context object.
    */
   toCtx(ctx) {
-    if (this.weight !== "normal") {
+    if (this.weight !== 'normal') {
       ctx.font = `${this.weight} ${this.size}px ${this.face}`;
     } else {
       ctx.font = `${this.size}px ${this.face}`;

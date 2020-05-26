@@ -1,27 +1,25 @@
-import * as utils from "../Utils";
-import * as constants from "../Constants";
-import WorldElement from "../WorldElement";
-import Text from "./box/Box.Text";
-import Graph from "./box/Box.Graph";
-import Label from "./box/Box.Label";
+import * as utils from '../Utils';
+import * as constants from '../Constants';
+import WorldElement from '../WorldElement';
+import Text from './box/Box.Text';
+import Graph from './box/Box.Graph';
+import Label from './box/Box.Label';
 
 /**
  * A Box allows for a window like object to be displayed in the world. This window object
  * has the possibility to display text, labels and graphs, completely isolated
- * from the settings of the world. 
+ * from the settings of the world.
  * A box object does not have a width or a height. Instead, it takes the dimensions
  * of the objects it contains.
  * @public
  * @class Box
  */
 export default class Box extends WorldElement {
-
   /**
    * @constructor
    * @param {object} [opts] Object that contains valid Box properties with values. Their values will be assigned at the end of the constructor. If an invalid property is passed then the value will be ignored.
    */
   constructor(opts) {
-
     // Extend WorldElement.
     super();
 
@@ -61,9 +59,9 @@ export default class Box extends WorldElement {
      * @type {boolean}
      */
     this.isDraggable = true;
-    
+
     /**
-     * Sets the padding in pixels that the Box has. 
+     * Sets the padding in pixels that the Box has.
      * @type {object}
      * @property {number} left=10 Left padding in pixels.
      * @property {number} bottom=10 Bottom padding in pixels.
@@ -84,7 +82,7 @@ export default class Box extends WorldElement {
      * Default value is "".
      * @type {string}
      */
-    this.title = "";
+    this.title = '';
 
     /**
      * Sets an array where all elements inside the Box are stored.
@@ -97,16 +95,15 @@ export default class Box extends WorldElement {
     this.font.set({
       weight: 500,
       size: 16,
-      baseline: "top",
-      align: "center",
+      baseline: 'top',
+      align: 'center',
       color: constants.COLORS.GRAY
     });
 
     // Apply user settings.
     utils.loadOptions(this, opts);
-
   }
-  
+
   /**
    * Adds a Text to the Box.
    * @param {number} width Width of the Text in pixels.
@@ -235,7 +232,7 @@ export default class Box extends WorldElement {
       ctx.stroke();
       ctx.closePath();
     }
-    if (this.title !== "") {
+    if (this.title !== '') {
       ctx.beginPath();
       this.font.toCtx(ctx);
       ctx.fillText(this.title, x0 + this.width / 2, y0 + this.padding.top);
@@ -254,5 +251,4 @@ export default class Box extends WorldElement {
       ctx.restore();
     }
   }
-
 }

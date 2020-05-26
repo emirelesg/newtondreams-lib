@@ -1,20 +1,18 @@
-import * as utils from "../Utils";
-import * as constants from "../Constants";
+import * as utils from '../Utils';
+import * as constants from '../Constants';
 import * as dom from './dom';
 
 /**
- * Class used to handle the sliders and their labels. 
+ * Class used to handle the sliders and their labels.
  * @public
  * @class Slider
  */
 export default class Slider {
-
   /**
    * @constructor
    * @param {object} [opts] Object that contains valid Slider properties with values. Their values will be assigned at the end of the constructor. If an invalid property is passed then the value will be ignored.
    */
   constructor(opts) {
-
     /**
      * Sets the HTML base id of the slider and label element.
      * In order for the slider to match with a label, the id must be the same for both elements.
@@ -23,7 +21,7 @@ export default class Slider {
      * Default value is "".
      * @type {string} Base id of the slider and label.
      */
-    this.id = "";
+    this.id = '';
 
     /**
      * Sets the color in HEX format of the slider.
@@ -52,7 +50,7 @@ export default class Slider {
      * Default value is "".
      * @type {string}
      */
-    this.units = "";
+    this.units = '';
 
     /**
      * Sets the starting position of the slider.
@@ -95,7 +93,7 @@ export default class Slider {
      * @type {function}
      */
     this.callback = undefined;
- 
+
     /**
      * Sets the arguments passed to the callback function set in {@link Slider.callback}.
      * Default value is undefined.
@@ -124,25 +122,25 @@ export default class Slider {
      * @type {object}
      */
     this.label = $(utils.fixId(`${this.id}_label`));
-    
+
     // Set the current color to the slider.
     this.setColor();
     this.setLabel(this.start);
-    
+
     // Init slider using the provided values.
     const self = this;
     /* eslint-disable-next-line no-undef */
     noUiSlider.create(this.slider, {
       start: this.start,
-      connect: "lower",
+      connect: 'lower',
       range: {
         min: this.min,
         max: this.max
       }
     });
-    
+
     // Configure the callback for when the slider changes value.
-    this.slider.noUiSlider.on("slide", values => {
+    this.slider.noUiSlider.on('slide', (values) => {
       self.value = utils.round(values[0], self.decPlaces);
       self.setLabel(values[0]);
       if (utils.isFunction(self.callback)) {
@@ -157,16 +155,14 @@ export default class Slider {
     this.label.after(cloneObj);
 
     // Create the Dom object from the cloned input.
-    this.clone = new dom.Input(cloneId, undefined, 
-      { 
-        isNumber: true,
-        onFocusout: () => {
-          this.set(this.clone.value);
-          this.clone.obj.addClass('d-none');
-          this.label.removeClass('d-none');
-        }
+    this.clone = new dom.Input(cloneId, undefined, {
+      isNumber: true,
+      onFocusout: () => {
+        this.set(this.clone.value);
+        this.clone.obj.addClass('d-none');
+        this.label.removeClass('d-none');
       }
-    );
+    });
 
     // When the label is clicked, hide it and show the cloned input.
     // Sets also the current value of the slider to the input.
@@ -176,7 +172,6 @@ export default class Slider {
       this.clone.obj.select();
       this.label.addClass('d-none');
     });
-
   }
 
   /**
@@ -219,7 +214,7 @@ export default class Slider {
    * @param {boolean} state Desired state of the slider.
    */
   enabled(state) {
-    this.slider.setAttribute("disabled", state);
+    this.slider.setAttribute('disabled', state);
     if (state) {
       this.setColor(this.prevColor);
     } else {
@@ -235,6 +230,6 @@ export default class Slider {
    */
   setColor(color) {
     if (color !== undefined) this.color = color;
-    $(`#${this.id}_slider`).css("background", this.color);
+    $(`#${this.id}_slider`).css('background', this.color);
   }
 }

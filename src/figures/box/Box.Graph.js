@@ -1,9 +1,9 @@
-import * as utils from "../../Utils";
-import * as constants from "../../Constants";
-import WorldElement from "../../WorldElement";
-import Scale from "../../Scale";
-import Axis from "../Axis";
-import Plot from "../Plot";
+import * as utils from '../../Utils';
+import * as constants from '../../Constants';
+import WorldElement from '../../WorldElement';
+import Scale from '../../Scale';
+import Axis from '../Axis';
+import Plot from '../Plot';
 
 /**
  * A Graph Box allow for {@link Plot} elements to be displayed in the box using a different scale to
@@ -12,7 +12,6 @@ import Plot from "../Plot";
  * @private
  */
 export default class Graph extends WorldElement {
-
   /**
    * @constructor
    * @param {Box} box Parent box.
@@ -21,7 +20,6 @@ export default class Graph extends WorldElement {
    * @param {object} [opts] Object that contains valid Graph properties with values. Their values will be assigned at the end of the constructor. If an invalid property is passed then the value will be ignored.
    */
   constructor(box, width, height, opts) {
-
     // Extend WorldElement.
     super();
 
@@ -74,35 +72,35 @@ export default class Graph extends WorldElement {
      * Default scale is 20px per 1 unit.
      * @type {Scale}
      */
-    this.scaleX = new Scale(20, 1, "");
+    this.scaleX = new Scale(20, 1, '');
 
     /**
      * Scale object for the -y axis.
      * Default scale is 20px per 1 unit.
      * @type {Scale}
      */
-    this.scaleY = new Scale(20, -1, "");
+    this.scaleY = new Scale(20, -1, '');
 
     /**
      * Sets the title for the graph.
      * Default value is "".
      * @type {string}
      */
-    this.title = "";
+    this.title = '';
 
     /**
      * Sets the label for the -x axis.
      * Default value is "x".
      * @type {string}
      */
-    this.xlabel = "x";
+    this.xlabel = 'x';
 
     /**
      * Sets the label for the -y axis.
      * Default value is "y".
      * @type {string}
      */
-    this.ylabel = "y";
+    this.ylabel = 'y';
 
     /**
      * Array that stores the position of the axis. See {@link Graph.setAxisPosition} for
@@ -110,7 +108,7 @@ export default class Graph extends WorldElement {
      * Default value is ["left", "bottom"].
      * @type {string[]}
      */
-    this.axisPosition = ["left", "bottom"];
+    this.axisPosition = ['left', 'bottom'];
 
     /**
      * Context of the cavas where the Graph is drawn. The canvas is saved
@@ -130,7 +128,7 @@ export default class Graph extends WorldElement {
       {
         world: this,
         color: constants.COLORS.GRAY,
-        subAxisColor: "#DDDDDD",
+        subAxisColor: '#DDDDDD',
         textOffset: 2,
         tickSize: 4,
         tickSizeSmall: 2,
@@ -139,22 +137,21 @@ export default class Graph extends WorldElement {
     );
 
     // Configure the font used on the axis.
-    this.font.set({ size: 14, color: constants.COLORS.GRAY, baseline: "top" });
+    this.font.set({ size: 14, color: constants.COLORS.GRAY, baseline: 'top' });
 
     // Configure the axis font and disable the prerenderer.
     this.axis.font.color = constants.COLORS.GRAY;
     this.axis.renderer.enabled = false;
-    
+
     // Configure the axis position.
     this.setAxisPosition();
-    
+
     // Apply user settings.
     utils.loadOptions(this, opts);
-
   }
 
   /**
-   * Sets the origin of the axis. 
+   * Sets the origin of the axis.
    * The -x axis has the following position options: center, right, left.
    * The -y axis has the following position options: center, top, bottom.
    * @public
@@ -162,26 +159,24 @@ export default class Graph extends WorldElement {
    * @param {string} [yPos] Desired position for the -y axis.
    */
   setAxisPosition(xPos, yPos) {
-
     if (xPos !== undefined) this.axisPosition[0] = xPos;
     if (yPos !== undefined) this.axisPosition[1] = yPos;
 
     let x = 0;
     let y = this.axis.height;
 
-    if (this.axisPosition[0] === "center") {
+    if (this.axisPosition[0] === 'center') {
       x = this.axis.width / 2;
-    } else if (this.axisPosition[0] === "right") {
+    } else if (this.axisPosition[0] === 'right') {
       x = this.axis.width;
     }
-    if (this.axisPosition[1] === "top") {
+    if (this.axisPosition[1] === 'top') {
       y = 0;
-    } else if (this.axisPosition[1] === "center") {
+    } else if (this.axisPosition[1] === 'center') {
       y = this.axis.height / 2;
     }
 
     this.axis.setPosition(x, y);
-
   }
 
   /**
@@ -340,11 +335,13 @@ export default class Graph extends WorldElement {
 
     // Draw legends.
     if (this.legends_enabled) {
-      const enabledPlots = this.plots.filter((p) => p.display && p.label !== '');
+      const enabledPlots = this.plots.filter(
+        (p) => p.display && p.label !== ''
+      );
       const legendSpace = this.width / enabledPlots.length;
       enabledPlots.forEach((plot, i) => {
         ctx.beginPath();
-        this.font.set({ size: 12, baseline: "middle" });
+        this.font.set({ size: 12, baseline: 'middle' });
         this.font.toCtx(ctx);
         const x = Math.floor(legendSpace / 2 + legendSpace * i);
         const y = Math.floor(this.padding.top * 0.3);
@@ -363,7 +360,7 @@ export default class Graph extends WorldElement {
     }
 
     // Draw Title
-    if (this.title !== "") {
+    if (this.title !== '') {
       this.font.set({ size: 14 });
       this.font.toCtx(ctx);
       ctx.beginPath();
@@ -403,9 +400,8 @@ export default class Graph extends WorldElement {
     this.axis.draw();
 
     // Draw plots.
-    this.plots.forEach(plot => {
-      if (plot.display) plot.draw()
+    this.plots.forEach((plot) => {
+      if (plot.display) plot.draw();
     });
   }
-
 }

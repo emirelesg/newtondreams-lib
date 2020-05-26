@@ -1,6 +1,6 @@
-import * as constants from "../Constants";
-import * as utils from "../Utils";
-import WorldElement from "../WorldElement";
+import * as constants from '../Constants';
+import * as utils from '../Utils';
+import WorldElement from '../WorldElement';
 
 /**
  * The Plot class can be used to draw a line plot or a histogram on an axis. It
@@ -10,13 +10,11 @@ import WorldElement from "../WorldElement";
  * @class Plot
  */
 export default class Plot extends WorldElement {
-
   /**
    * @constructor
    * @param {object} [opts] Object that contains valid Plot properties with values. Their values will be assigned at the end of the constructor. If an invalid property is passed then the value will be ignored.
    */
   constructor(opts) {
-
     // Extend WorldElement.
     super();
 
@@ -51,8 +49,8 @@ export default class Plot extends WorldElement {
     this.markers = [];
 
     /**
-     * Sets the maximum amount of points the plot can have at a single time. Once 
-     * the array of points fills up, the earliest points will be removed. 
+     * Sets the maximum amount of points the plot can have at a single time. Once
+     * the array of points fills up, the earliest points will be removed.
      * This is done for memory purposes.
      * Default value is 300.
      * @type {number}
@@ -78,7 +76,7 @@ export default class Plot extends WorldElement {
      * Default value is "".
      * @type {string}
      */
-    this.label = "";
+    this.label = '';
 
     /**
      * Flag for drawing all points in the plot regardless if the point is outside the
@@ -93,7 +91,7 @@ export default class Plot extends WorldElement {
      * Default value is "line".
      * @type {string}
      */
-    this.style = "line";
+    this.style = 'line';
 
     /**
      * When the plot is configured in histogram mode, the binWidth is the width of the
@@ -105,7 +103,6 @@ export default class Plot extends WorldElement {
 
     // Apply user settings.
     utils.loadOptions(this, opts);
-
   }
 
   /**
@@ -146,8 +143,8 @@ export default class Plot extends WorldElement {
     let input = {
       x,
       y,
-      label: "",
-      lower_label: "",
+      label: '',
+      lower_label: '',
       color: this.color,
       top: true
     };
@@ -170,7 +167,6 @@ export default class Plot extends WorldElement {
    * @private
    */
   draw() {
-
     // Get all points.
     const p = this.getPoints();
 
@@ -178,7 +174,6 @@ export default class Plot extends WorldElement {
     if (this.shade) this.drawShade(p);
     this.drawPlot(p);
     this.drawMarkers();
-    
   }
 
   /**
@@ -186,7 +181,9 @@ export default class Plot extends WorldElement {
    * @returns {number} The index of the last point.
    */
   maxIdx() {
-    return this.displayUntil >= 0 && this.displayUntil < this.points.length ? this.displayUntil + 1 : this.points.length;
+    return this.displayUntil >= 0 && this.displayUntil < this.points.length
+      ? this.displayUntil + 1
+      : this.points.length;
   }
 
   /**
@@ -197,15 +194,10 @@ export default class Plot extends WorldElement {
   getPoints() {
     return this.points
       .filter((_, idx) => idx < this.maxIdx())
-      .map(p => {
+      .map((p) => {
         const px = p[0] * this.world.scaleX.toPx;
         const py = p[1] * this.world.scaleY.toPx;
-        return [
-          ...p,
-          px,
-          py,
-          this.world.axis.isPointVisible(px, py)
-        ];
+        return [...p, px, py, this.world.axis.isPointVisible(px, py)];
       });
   }
 
@@ -227,7 +219,7 @@ export default class Plot extends WorldElement {
           disconnected = false;
         } else {
           ctx.lineTo(px, py);
-          if (i === this.maxIdx() - 1) ctx.lineTo(px, 0);          
+          if (i === this.maxIdx() - 1) ctx.lineTo(px, 0);
         }
       } else {
         disconnected = true;
@@ -251,7 +243,7 @@ export default class Plot extends WorldElement {
     ctx.strokeStyle = this.color;
     let disconnected = false;
     p.forEach(([x, y, px, py, isVisible], i) => {
-      if (this.style === "line") {
+      if (this.style === 'line') {
         if (this.drawInvisiblePoints || isVisible) {
           if (i === 0 || disconnected) {
             ctx.moveTo(px, py);
@@ -280,9 +272,8 @@ export default class Plot extends WorldElement {
    */
   drawMarkers() {
     const { scaleX, scaleY, ctx } = this.world;
-    this.font.set({ baseline: "middle" });
+    this.font.set({ baseline: 'middle' });
     this.markers.forEach((m) => {
-
       // Draw marker circles.
       const px = m.x * scaleX.toPx;
       const py = m.y * scaleY.toPx;
@@ -293,30 +284,20 @@ export default class Plot extends WorldElement {
       ctx.closePath();
 
       // Draw marker labels.
-      if (m.label !== "") {
+      if (m.label !== '') {
         const direction = m.top ? -1 : 1;
         this.font.toCtx(ctx);
-        if (m.lower_label !== "") {
-          ctx.fillText(
-            m.label,
-            px,
-            py + (this.markerRadius + 25) * direction
-          );
+        if (m.lower_label !== '') {
+          ctx.fillText(m.label, px, py + (this.markerRadius + 25) * direction);
           ctx.fillText(
             m.lower_label,
             px,
             py + (this.markerRadius + 10) * direction
           );
         } else {
-          ctx.fillText(
-            m.label,
-            px,
-            py + (this.markerRadius + 10) * direction
-          );
+          ctx.fillText(m.label, px, py + (this.markerRadius + 10) * direction);
         }
       }
     });
   }
-
-
 }

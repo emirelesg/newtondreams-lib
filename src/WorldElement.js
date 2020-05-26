@@ -1,9 +1,9 @@
 /* eslint-disable class-methods-use-this */
-import * as constants from "./Constants";
-import * as utils from "./Utils";
-import World from "./World";
-import Font from "./Font";
-import Renderer from "./Renderer";
+import * as constants from './Constants';
+import * as utils from './Utils';
+import World from './World';
+import Font from './Font';
+import Renderer from './Renderer';
 
 /**
  * Parent class for all elements added to the world. Sets the basic properties
@@ -12,12 +12,10 @@ import Renderer from "./Renderer";
  * @class WorldElement
  */
 export default class WorldElement {
-
   /**
    * @constructor
    */
   constructor() {
-
     /**
      * Sets the world where this element is found. It is automatically set when added to the world.
      * @type {World}
@@ -39,10 +37,10 @@ export default class WorldElement {
     this.zIndex = 0;
 
     /**
-     * A copy of the z-index value is stored here. When the element is dragged around, 
-     * the element moves as a topmost element (only if {@link WorldElement.topmostOnDrag} 
-     * is set to true). Therefore, the z-index of the element is increased and must 
-     * be restored when the mouse gets released. 
+     * A copy of the z-index value is stored here. When the element is dragged around,
+     * the element moves as a topmost element (only if {@link WorldElement.topmostOnDrag}
+     * is set to true). Therefore, the z-index of the element is increased and must
+     * be restored when the mouse gets released.
      * The default value is 0.
      * @type {number}
      */
@@ -115,7 +113,7 @@ export default class WorldElement {
     this.color = constants.COLORS.RED;
 
     /**
-     * Sets the drawing scale of the element. 
+     * Sets the drawing scale of the element.
      * Until now this property is only useful for {@link Picture} objects.
      * Default value is 1.
      * @type {number}
@@ -130,7 +128,7 @@ export default class WorldElement {
     this.rotation = 0;
 
     /**
-     * Flag used to determine if an object is a child of WorldElement. 
+     * Flag used to determine if an object is a child of WorldElement.
      * Only these objects have a {@link WorldElement.valid} flag.
      * Default value is true.
      * @type {boolean}
@@ -266,5 +264,4 @@ export default class WorldElement {
     this.position.y += utils.round(y, 3);
     if (this.renderer) this.renderer.rendered = false;
   }
-
 }

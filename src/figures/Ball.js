@@ -1,6 +1,6 @@
-import * as utils from "../Utils";
-import * as constants from "../Constants";
-import WorldElement from "../WorldElement";
+import * as utils from '../Utils';
+import * as constants from '../Constants';
+import WorldElement from '../WorldElement';
 
 /**
  * The Ball class is a particle class used to draw round particles with the advantage that
@@ -10,14 +10,12 @@ import WorldElement from "../WorldElement";
  * @class Ball
  */
 export default class Ball extends WorldElement {
-
   /**
    * @constructor
    * @param {number} [r=1] Radius of the charge in units.
    * @param {object} [opts] Object that contains valid Ball properties with values. Their values will be assigned at the end of the constructor. If an invalid property is passed then the value will be ignored.
    */
   constructor(r, opts) {
-
     // Extend WorldElement.
     super();
 
@@ -27,7 +25,6 @@ export default class Ball extends WorldElement {
      * @type {boolean}
      */
     this.isDraggable = true;
-
 
     /**
      * Flag for allowing the ball to become a topmost object when its beging dragged,
@@ -50,14 +47,14 @@ export default class Ball extends WorldElement {
      * Default value is "".
      * @type {string}
      */
-    this.lowerLabel = "";
+    this.lowerLabel = '';
 
     /**
      * Upper spot for writing a label on the bal..
      * Default value is "".
      * @type {string}
      */
-    this.upperLabel = "";
+    this.upperLabel = '';
 
     /**
      * Flag for enabling a gradient on the ball. The color used for gradient
@@ -69,7 +66,6 @@ export default class Ball extends WorldElement {
 
     // Apply user settings.
     utils.loadOptions(this, opts);
-
   }
 
   /**
@@ -84,8 +80,7 @@ export default class Ball extends WorldElement {
         this.world.mouse.ry,
         this.position.x,
         this.position.y
-      ) <
-      this.r ** 2
+      ) < Math.pow(this.r, 2)
     );
   }
 
@@ -102,7 +97,7 @@ export default class Ball extends WorldElement {
     const pr = this.r * scaleX.toPx;
     if (this.gradient) {
       color = ctx.createRadialGradient(px, py, 0, px, py, pr);
-      color.addColorStop(0, "white");
+      color.addColorStop(0, 'white');
       color.addColorStop(1, this.color);
     }
     ctx.fillStyle = color;
@@ -110,12 +105,12 @@ export default class Ball extends WorldElement {
     ctx.arc(px, py, pr, 0, constants.TWO_PI);
     ctx.fill();
     ctx.closePath();
-    if (this.upperLabel !== "" || this.lowerLabel !== "") {
+    if (this.upperLabel !== '' || this.lowerLabel !== '') {
       this.font.toCtx(ctx);
-      const offset = this.upperLabel !== "" && this.lowerLabel !== "" ? 7 : 0;
-      if (this.upperLabel !== "")
+      const offset = this.upperLabel !== '' && this.lowerLabel !== '' ? 7 : 0;
+      if (this.upperLabel !== '')
         ctx.fillText(this.upperLabel, px, py - offset);
-      if (this.lowerLabel !== "")
+      if (this.lowerLabel !== '')
         ctx.fillText(this.lowerLabel, px, py + offset);
     }
   }
@@ -150,12 +145,11 @@ export default class Ball extends WorldElement {
    */
   static getChargeSign(charge) {
     if (charge > 0) {
-      return "+";
+      return '+';
     }
     if (charge < 0) {
-      return "-";
+      return '-';
     }
-    return "0";
+    return '0';
   }
-
 }

@@ -1,5 +1,5 @@
-import * as utils from "./Utils";
-import World from "./World";
+import * as utils from './Utils';
+import World from './World';
 
 /**
  * Enables an element to be prerendered in a hidden canvas. Once an element is prerendered it can be drawn to the main canvas faster.
@@ -8,13 +8,11 @@ import World from "./World";
  * @class Renderer
  */
 export default class Renderer {
-
   /**
    * @constructor
    * @param {object} [opts] Object that contains valid Renderer properties with values. Their values will be assigned at the end of the constructor. If an invalid property is passed then the value will be ignored.
    */
   constructor(opts) {
-
     /**
      * Sets if the target object is an axis. It is important to set this property for all axis objects.
      * Default value is false.
@@ -45,7 +43,7 @@ export default class Renderer {
     this.enabled = true;
 
     /**
-     * Sets the reference to the world object. 
+     * Sets the reference to the world object.
      * Default value is undefined.
      * @type {World}
      */
@@ -62,13 +60,13 @@ export default class Renderer {
      * Canvas element where the object will be prerendered.
      * @type {object}
      */
-    this.canvas = document.createElement("canvas");
+    this.canvas = document.createElement('canvas');
 
     /**
      * Context of the canvas element where the object will be prerendered.
      * @type {object}
      */
-    this.ctx = this.canvas.getContext("2d");
+    this.ctx = this.canvas.getContext('2d');
 
     /**
      * Function used to set the drawing procedure for the renderer.
@@ -84,7 +82,6 @@ export default class Renderer {
 
     // Apply user settings.
     utils.loadOptions(this, opts);
-
   }
 
   /**

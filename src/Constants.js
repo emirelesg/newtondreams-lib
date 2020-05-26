@@ -5,11 +5,11 @@
 /**
  * Defines how the coordinates of an object will be changed when the object is dragged around.
  * @property {string} BY_PX="px" The position of the object will be changed in pixels.
- * @property {string} BY_UNITS="units" The position of the object will be changed in units. 
+ * @property {string} BY_UNITS="units" The position of the object will be changed in units.
  */
 export const MOVE_STYLE = {
-  BY_PX: "px",
-  BY_UNITS: "units"
+  BY_PX: 'px',
+  BY_UNITS: 'units'
 };
 
 /**
@@ -42,12 +42,12 @@ export const ANGLE_STYLE = {
  * @property {string} LETTERS="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
  */
 export const SYMBOL = {
-  BLANK: "-",
-  THETA: "θ",
-  INF: "\u221e",
-  MICRO: "\u03BC",
-  OHM: "\u2126",
-  LETTERS: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  BLANK: '-',
+  THETA: 'θ',
+  INF: '\u221e',
+  MICRO: '\u03BC',
+  OHM: '\u2126',
+  LETTERS: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 };
 
 /**
@@ -59,11 +59,11 @@ export const SYMBOL = {
  * @property {string} TEXT="text"
  */
 export const CURSOR = {
-  DEFAULT: "default",
-  POINTER: "pointer",
-  CROSS: "crosshair",
-  MOVE: "move",
-  TEXT: "text"
+  DEFAULT: 'default',
+  POINTER: 'pointer',
+  CROSS: 'crosshair',
+  MOVE: 'move',
+  TEXT: 'text'
 };
 
 /**
@@ -94,13 +94,13 @@ export const CM_TO_M = 1 / 100;
  * Conversion factor from cubic centimeters to cubic meters.
  * @type {number}
  */
-export const CM3_TO_M3 = 1 / 100 ** 3;
+export const CM3_TO_M3 = Math.pow(1 / 100, 3);
 
 /**
  * Conversion factor from pascals to atmospheres.
  * @type {number}
  */
-export const PA_TO_ATM = 9.86923E-6;
+export const PA_TO_ATM = 9.86923e-6;
 
 /**
  * PI constant.
@@ -199,14 +199,14 @@ export const E0 = 8.854e-12;
  * @type {number}
  * @see https://en.wikipedia.org/wiki/Boltzmann_constant
  */
-export const BOLTZMANN = 1.38064852E-23;
+export const BOLTZMANN = 1.38064852e-23;
 
 /**
  * Avogadro constant.
  * @type {number}
  * @see https://en.wikipedia.org/wiki/Avogadro_constant
  */
-export const AVOGADRO = 6.0221409E23;
+export const AVOGADRO = 6.0221409e23;
 
 /**
  * Used when the mouse isn't over an object.
@@ -224,51 +224,51 @@ export const DRAG_NOTHING = null;
  * Defines the default font used for all simulations.
  */
 export const FONT =
-  "-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, Arial, Sans Serif";
+  '-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue, Arial, Sans Serif';
 
 /**s
  * Defines the default font size for all simulations.
  */
-export const FONT_SIZE = "12";
+export const FONT_SIZE = '12';
 
 /**
  * Defines the default font color for all simulaions.
  */
-export const FONT_COLOR = "#444444";
+export const FONT_COLOR = '#444444';
 
 /**
  * Defines the valid font baselines.
  */
 export const FONT_BASELINE = [
-  "top",
-  "hanging",
-  "middle",
-  "alphabetic",
-  "ideographic",
-  "bottom"
+  'top',
+  'hanging',
+  'middle',
+  'alphabetic',
+  'ideographic',
+  'bottom'
 ];
 
 /**
  * Defines teh valid font alignments.
  */
-export const FONT_ALIGN = ["left", "right", "center", "start", "end"];
+export const FONT_ALIGN = ['left', 'right', 'center', 'start', 'end'];
 
 /**
  * Defines the default colors used for simulations.
  */
 export const COLORS = {
-  RED: "#F44336",
-  BLUE: "#007bff",
-  GREEN: "#4CAF50",
-  YELLOW: "#FFC510",
-  PURPLE: "#673AB7",
-  BROWN: "#795548",
-  LIGHT_GREEN: "#CDDC39",
-  GRAY: "#607D8B",
-  LIGHT_GRAY: "#8FA4AD",
-  WHITE: "#FFFFFF",
-  BLACK: "#000000",
-  COMPONENT: "#B7B7B7"
+  RED: '#F44336',
+  BLUE: '#007bff',
+  GREEN: '#4CAF50',
+  YELLOW: '#FFC510',
+  PURPLE: '#673AB7',
+  BROWN: '#795548',
+  LIGHT_GREEN: '#CDDC39',
+  GRAY: '#607D8B',
+  LIGHT_GRAY: '#8FA4AD',
+  WHITE: '#FFFFFF',
+  BLACK: '#000000',
+  COMPONENT: '#B7B7B7'
 };
 
 /**
@@ -277,31 +277,31 @@ export const COLORS = {
  */
 export const BOX_COLORS = {
   BLUE: {
-    BACKGROUND: "#F0F5FF",
-    BORDER: "#A2C1FF"
+    BACKGROUND: '#F0F5FF',
+    BORDER: '#A2C1FF'
   },
   GREEN: {
-    BACKGROUND: "#D5E8D4",
-    BORDER: "#82B366"
+    BACKGROUND: '#D5E8D4',
+    BORDER: '#82B366'
   },
   RED: {
-    BACKGROUND: "#F8CECC",
-    BORDER: "#B85450"
+    BACKGROUND: '#F8CECC',
+    BORDER: '#B85450'
   },
   YELLOW: {
-    BACKGROUND: "#FFF2CC",
-    BORDER: "#D6B656"
+    BACKGROUND: '#FFF2CC',
+    BORDER: '#D6B656'
   },
   ORANGE: {
-    BACKGROUND: "#FFE6CC",
-    BORDER: "#D79B00"
+    BACKGROUND: '#FFE6CC',
+    BORDER: '#D79B00'
   },
   PURPLE: {
-    BACKGROUND: "#E1D5E7",
-    BORDER: "#9673A6"
+    BACKGROUND: '#E1D5E7',
+    BORDER: '#9673A6'
   },
   GRAY: {
-    BACKGROUND: "#F5F5F5",
-    BORDER: "#CCCCCC"
+    BACKGROUND: '#F5F5F5',
+    BORDER: '#CCCCCC'
   }
 };

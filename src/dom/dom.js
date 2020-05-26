@@ -1,4 +1,4 @@
-import * as utils from "../Utils";
+import * as utils from '../Utils';
 
 /**
  * Parent class for handling DOM elements.
@@ -6,13 +6,11 @@ import * as utils from "../Utils";
  * @class DOMElement
  */
 export default class DOMElement {
-
   /**
    * @constructor
    * @param {string} id HTML Id of the element.
    */
   constructor(id) {
-
     /**
      * jQuery reference to the element.
      * @type {object}
@@ -23,8 +21,7 @@ export default class DOMElement {
      * Stores if the element is enabled or disabled.
      * @type {boolean}
      */
-    this.isEnabled = !this.obj.prop("disabled");
-
+    this.isEnabled = !this.obj.prop('disabled');
   }
 
   /**
@@ -34,12 +31,10 @@ export default class DOMElement {
   enabled(state) {
     if (this.isEnabled !== state) {
       this.isEnabled = state;
-      this.obj.prop("disabled", !this.isEnabled);
+      this.obj.prop('disabled', !this.isEnabled);
     }
   }
-
 }
-
 
 /**
  * Class used to handle a checkbox (<input type="checkbox">).
@@ -53,19 +48,17 @@ export default class DOMElement {
  * });
  */
 export class Option extends DOMElement {
-
   /**
    * @constructor
    * @param {string} id HTML id of the checkbox.
    * @param {function} onClick Callback function for when the checkbox changes state.
    */
   constructor(id, onClick) {
-
     // Extend DOMElement.
     super(id);
-    
+
     /**
-     * Callback function for when the checkbox changes state. The new state of the 
+     * Callback function for when the checkbox changes state. The new state of the
      * checkbox is passed to the callback function as a parameter.
      * @type {function}
      */
@@ -75,16 +68,15 @@ export class Option extends DOMElement {
      * State of the option.
      * @type {boolean}
      */
-    this.value = this.obj.prop("checked");
+    this.value = this.obj.prop('checked');
 
     // Set the callback.
-    this.obj.on("click", () => {
-      this.value = this.obj.prop("checked");
-      if (utils.isFunction(this.onClick)) this.onClick(this.obj.prop("checked"));
+    this.obj.on('click', () => {
+      this.value = this.obj.prop('checked');
+      if (utils.isFunction(this.onClick))
+        this.onClick(this.obj.prop('checked'));
     });
-
   }
-
 }
 
 /**
@@ -99,14 +91,12 @@ export class Option extends DOMElement {
  * });
  */
 export class Button extends DOMElement {
-
   /**
    * @constructor
    * @param {string} id HTML id of the button.
    * @param {function} onClick Callback function for when button is pressed.
    */
   constructor(id, onClick) {
-
     // Extend DOMElement.
     super(id);
 
@@ -117,12 +107,10 @@ export class Button extends DOMElement {
     this.onClick = onClick;
 
     // Set the callback.
-    this.obj.on("click", () => {
+    this.obj.on('click', () => {
       if (utils.isFunction(this.onClick)) this.onClick();
     });
-
   }
-
 }
 
 /**
@@ -137,14 +125,12 @@ export class Button extends DOMElement {
  * });
  */
 export class Input extends DOMElement {
-
   /**
    * @constructor
    * @param {string} id HTML id of the input.
    * @param {function} onChange Callback function for when input value changes.
    */
   constructor(id, onChange, opts) {
-
     // Extend DOMElement.
     super(id);
 
@@ -189,7 +175,7 @@ export class Input extends DOMElement {
     this.set(this.default);
 
     // Callback whenever the input is changed by the user.
-    this.obj.on("input", (e) => {
+    this.obj.on('input', (e) => {
       const rawValue = this.obj.val();
       if (this.isNumber) {
         if (rawValue === '') {
@@ -221,8 +207,7 @@ export class Input extends DOMElement {
       if (e.keyCode === 13) {
         this.obj.blur();
       }
-    })
-
+    });
   }
 
   set(value) {
@@ -241,7 +226,6 @@ export class Input extends DOMElement {
       }
     }
   }
-
 }
 
 /**
@@ -260,19 +244,17 @@ export class Input extends DOMElement {
  * });
  */
 export class Select extends DOMElement {
-
   /**
    * @constructor
    * @param {string} id HTML id of the select element.
    * @param {function} onChange Callback function for when the selected option changes.
    */
   constructor(id, onChange) {
-
     // Extend DOMElement.
     super(id);
 
     /**
-     * Callback function for when the selected option changes. The value of the selected 
+     * Callback function for when the selected option changes. The value of the selected
      * option is passed to the callback function as a parameter.
      * @type {function}
      */
@@ -286,10 +268,9 @@ export class Select extends DOMElement {
 
     // Set the callback.
     this.obj.on('change', () => {
-      this.value = this.obj.find(":selected").val();
+      this.value = this.obj.find(':selected').val();
       if (utils.isFunction(this.onChange)) this.onChange(this.value);
     });
-
   }
 
   /**
@@ -303,12 +284,14 @@ export class Select extends DOMElement {
     // Add new options.
     for (let [key, value] of Object.entries(options)) {
       this.obj.append(
-        $('<option></option>').attr('value', value).attr('selected', value === select).text(key)
+        $('<option></option>')
+          .attr('value', value)
+          .attr('selected', value === select)
+          .text(key)
       );
     }
     this.obj.trigger('change');
   }
-  
 }
 
 /**
@@ -325,14 +308,12 @@ export class Select extends DOMElement {
  * });
  */
 export class Options {
-
   /**
    * @constructor
    * @param {string} name Name of the radio buttons.
    * @param {function} onChange Callback function for when any of the radio buttons changes state.
    */
   constructor(name, onChange) {
-
     /**
      * Sets the id of the input using the name as an argument. This id is then used to obtain the
      * jQuery object of the input.
@@ -353,7 +334,7 @@ export class Options {
     this.value = $(`${this.name}:checked`).val();
 
     /**
-     * Callback function for when a radio button is selected. The value of the selected 
+     * Callback function for when a radio button is selected. The value of the selected
      * radio button is passed to the callback function as a parameter.
      * @type {function}
      */
@@ -366,7 +347,6 @@ export class Options {
         this.onChange(this.value);
       }
     });
-  
   }
 
   /**
@@ -375,7 +355,7 @@ export class Options {
    */
   select(value) {
     this.value = value;
-    this.obj.each(function() {
+    this.obj.each(function () {
       if ($(this).val() === value) {
         $(this).parent().addClass('active');
         $(this).prop('checked', true);
@@ -392,10 +372,9 @@ export class Options {
    */
   enabled(state) {
     if (state) {
-      this.obj.parent().removeClass('disabled')
+      this.obj.parent().removeClass('disabled');
     } else {
-      this.obj.parent().addClass('disabled')     
+      this.obj.parent().addClass('disabled');
     }
   }
-
 }

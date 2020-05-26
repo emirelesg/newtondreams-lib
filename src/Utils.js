@@ -1,4 +1,4 @@
-import * as constants from "./Constants";
+import * as constants from './Constants';
 
 /**
  * Obtains the pixel ratio of the device. Used to scale properly the canvas for high resolution devices.
@@ -19,14 +19,14 @@ export function getPixelRatio(ctx) {
 }
 
 /**
- * Makes sure that a HTML id allways has a # at the beginning. 
+ * Makes sure that a HTML id allways has a # at the beginning.
  * If the provided id already has a # then it returns the same id, otherwise it is added.
  * @public
  * @param {string} id Id of an HTML object.
  * @returns {string} Id with a # prepended.
  */
 export function fixId(id) {
-  return id[0] === "#" ? id : `#${id}`;
+  return id[0] === '#' ? id : `#${id}`;
 }
 
 /**
@@ -37,7 +37,7 @@ export function fixId(id) {
  * @returns {number} Rounded number.
  */
 export function round(value, precision) {
-  const multiplier = 10 ** (precision || 0);
+  const multiplier = Math.pow(10, precision || 0);
   return Math.round(value * multiplier) / multiplier;
 }
 
@@ -90,7 +90,7 @@ export function sin(val, type) {
  * @returns {boolean} True if the object is a function, false otherwise.
  */
 export function isFunction(f) {
-  return typeof f === "function";
+  return typeof f === 'function';
 }
 
 /**
@@ -100,7 +100,7 @@ export function isFunction(f) {
  * @returns {boolean} True if the object is an object, false otherwise.
  */
 export function isObject(o) {
-  return typeof o === "object";
+  return typeof o === 'object';
 }
 
 /**
@@ -110,7 +110,7 @@ export function isObject(o) {
  * @returns {boolean} True if the object is a string, false otherwise.
  */
 export function isString(s) {
-  return typeof s === "string";
+  return typeof s === 'string';
 }
 
 /**
@@ -124,7 +124,7 @@ export function isString(s) {
  * @returns {number} The squared distance between points.
  */
 export function distSquared(x0, y0, x1, y1) {
-  return (x1 - x0) ** 2 + (y1 - y0) ** 2;
+  return Math.pow(x1 - x0, 2) + Math.pow(y1 - y0, 2);
 }
 
 /**
@@ -135,7 +135,9 @@ export function distSquared(x0, y0, x1, y1) {
  * @returns {number} Angle in radians.
  */
 export function rad(angle, type) {
-  return type === constants.ANGLE_STYLE.DEG ? angle * constants.DEG_TO_RAD : angle;
+  return type === constants.ANGLE_STYLE.DEG
+    ? angle * constants.DEG_TO_RAD
+    : angle;
 }
 
 /**
@@ -151,7 +153,10 @@ export function rad(angle, type) {
  * @returns {boolean} True if point is within the box, false otherwise.
  */
 export function isCoordInside(x, y, bx, by, bw, bh) {
-  return (bx - x) ** 2 < bw ** 2 && (y - by) ** 2 < bh ** 2;
+  return (
+    Math.pow(bx - x, 2) < Math.pow(bw, 2) &&
+    Math.pow(y - by, 2) < Math.pow(bh, 2)
+  );
 }
 
 /**
@@ -171,9 +176,7 @@ export function formatValue(val, units, decPlaces, fixPlaces) {
   let result =
     Number.isNaN(val) && val !== undefined ? 0 : round(val, decPlaces);
   if (fixPlaces) result = result.toFixed(decPlaces);
-  return units === "°" || units === "º"
-    ? `${result}°`
-    : `${result} ${units}`;
+  return units === '°' || units === 'º' ? `${result}°` : `${result} ${units}`;
 }
 
 /**
@@ -202,16 +205,15 @@ export function loadOptions(obj, args) {
  * changes dramatically.
  * @param {number} value Corresponds to the range between the minimum required value to be displayed and the maximum required value to be displayed.
  * @param {number} stepAmount Desired amount of steps within the range.
- * @returns {number} Magnitude of the step size. 
+ * @returns {number} Magnitude of the step size.
  */
 export function calcStepSize(value, stepAmount) {
-  
   // Calculate initial guess at step size
   const tempStep = value / stepAmount;
 
   // Get the magnitude of the step size
   const mag = Math.floor(Math.log(tempStep) / constants.LOG10);
-  const magPow = 10 ** mag;
+  const magPow = Math.pow(10, mag);
 
   // Calculate the most significant digit of the new step size
   let magMsd = Math.round(tempStep / magPow + 0.5);
@@ -242,7 +244,6 @@ export function gaussian(n) {
   return sum / n;
 }
 
-
 /**
  * Adds an alpha channel to an rgb color.
  * Must have the pattern #AABBCC.
@@ -255,5 +256,5 @@ export function rgbToRgba(color, alpha) {
   const r = parseInt(color.substr(1, 2), 16);
   const g = parseInt(color.substr(3, 2), 16);
   const b = parseInt(color.substr(5, 2), 16);
-  return `rgba(${r}, ${g}, ${b}, ${alphaP})`
+  return `rgba(${r}, ${g}, ${b}, ${alphaP})`;
 }

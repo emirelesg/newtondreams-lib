@@ -1,7 +1,7 @@
-import * as utils from "../Utils";
-import * as constants from "../Constants";
-import WorldElement from "../WorldElement";
-import Renderer from "../Renderer";
+import * as utils from '../Utils';
+import * as constants from '../Constants';
+import WorldElement from '../WorldElement';
+import Renderer from '../Renderer';
 
 /**
  * The Axis class is responsible for drawing the axis onto the canvas and setting the new
@@ -11,7 +11,6 @@ import Renderer from "../Renderer";
  * @class Axis
  */
 export default class Axis extends WorldElement {
-
   /**
    * @constructor
    * @param {number} [width=0] Initial width of the axis.
@@ -19,7 +18,6 @@ export default class Axis extends WorldElement {
    * @param {object} [opts] Object that contains valid Axis properties with values. Their values will be assigned at the end of the constructor. If an invalid property is passed then the value will be ignored.
    */
   constructor(width, height, opts) {
-    
     // Extend WorldElement.
     super();
 
@@ -47,14 +45,14 @@ export default class Axis extends WorldElement {
      * Default value is #CCCCCC.
      * @type {string}
      */
-    this.color = "#CCCCCC";
+    this.color = '#CCCCCC';
 
     /**
      * Sets the color of the grid.
      * Default value is #EEEEEE.
      * @type {string}
      */
-    this.subAxisColor = "#EEEEEE";
+    this.subAxisColor = '#EEEEEE';
 
     /**
      * Sets the cursor style when the mouse is over the axis.
@@ -104,7 +102,7 @@ export default class Axis extends WorldElement {
      * @type {number}
      */
     this.tickSize = 12;
-    
+
     /**
      * Sets the length of the smaller ticks that are placed every "unit" / 2 in pixels.
      * Default value is 8.
@@ -148,7 +146,6 @@ export default class Axis extends WorldElement {
 
     // Apply user settings.
     utils.loadOptions(this, opts);
-
   }
 
   /**
@@ -238,7 +235,7 @@ export default class Axis extends WorldElement {
       const xOffset = this.outsideNumbers
         ? -this.tickSize - this.textOffset
         : this.tickSize + this.textOffset;
-      ctx.textAlign = this.outsideNumbers ? "right" : "left";
+      ctx.textAlign = this.outsideNumbers ? 'right' : 'left';
 
       // Draw ticks subdividing the X axis
       for (y = fromY; y <= toY; y += scaleY.px) {
@@ -285,7 +282,7 @@ export default class Axis extends WorldElement {
       const yOffset = this.outsideNumbers
         ? 7 + this.tickSize + this.textOffset
         : -7 - this.tickSize - this.textOffset;
-      ctx.textAlign = "center";
+      ctx.textAlign = 'center';
 
       // Draw ticks subdividing the Y axis
       for (x = fromX; x <= toX; x += scaleX.px) {
@@ -324,7 +321,7 @@ export default class Axis extends WorldElement {
       const xOffset = this.outsideNumbers
         ? -this.tickSize - this.textOffset
         : this.tickSize + this.textOffset;
-      ctx.textAlign = this.outsideNumbers ? "right" : "left";
+      ctx.textAlign = this.outsideNumbers ? 'right' : 'left';
       ctx.fillText(`0${scaleX.unit}`, xOffset, 0);
     }
 
@@ -333,7 +330,7 @@ export default class Axis extends WorldElement {
   }
 
   /**
-   * Main draw function for the axis called by the World automatically. Since the axis is prerendered, 
+   * Main draw function for the axis called by the World automatically. Since the axis is prerendered,
    * this function handles the toggling between the renderer and the canvas.
    * @private
    */
