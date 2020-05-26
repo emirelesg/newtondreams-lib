@@ -5,7 +5,8 @@
   "main": "./src/module.js",
   "scripts": {
     "build": "webpack -p --mode production",
-    "build-dev": "webpack -d --mode development"
+    "build-dev": "webpack -d --mode development",
+    "docs": "esdoc -c .esdoc.json"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +16,8 @@
     "@babel/preset-env": "^7.9.6",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
+    "esdoc": "^1.1.0",
+    "esdoc-standard-plugin": "^1.0.0",
     "eslint": "^7.1.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.20.2",
