@@ -1,4 +1,4 @@
-// import * as constants from './Constants';
+import * as constants from './Constants';
 import * as utils from './Utils';
 import World from './World';
 import Slider from './dom/Slider';
@@ -12,7 +12,7 @@ import Box from './figures/Box';
 import DataCursor from './figures/DataCursor';
 
 const p$ = {
-  // ...constants,
+  ...constants,
   Box,
   Ball,
   Picture,
