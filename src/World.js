@@ -508,12 +508,12 @@ export default class World {
     // Split url to get simulation path
     // /newtondreams-bs4/fisica/sim/
     const urlArray = window.location.pathname.split('/');
-    const simType = urlArray[2];
-    const simName = urlArray[3];
+    const simType = urlArray[1];
+    const simName = urlArray[2];
     $.ajax({
       data: {
         data: this.canvas.toDataURL(),
-        path: `/${simType}/${simName}/`
+        path: `${simType}/${simName}/`
       },
       url: '../../php/export.php',
       dataType: 'html',
