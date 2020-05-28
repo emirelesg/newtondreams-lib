@@ -229,7 +229,7 @@ export const FONT =
 /**s
  * Defines the default font size for all simulations.
  */
-export const FONT_SIZE = '12';
+export const FONT_SIZE = '16';
 
 /**
  * Defines the default font color for all simulaions.
