@@ -31,7 +31,6 @@ jobs:
 
       - name: Docs
         run: npm run docs --if-present
-
         
       - name: FTP sync
         uses: emirelesg/action-ftp-sync@master
@@ -43,4 +42,4 @@ jobs:
           remoteDir: 'js/core'
         env:
           FORCE_COLOR: 1
-          DRY_RUN: true
+          # DRY_RUN: true
