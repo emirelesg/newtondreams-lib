@@ -1,5 +1,4 @@
 import * as utils from './Utils';
-// import World from './World';
 
 /**
  * Enables an element to be prerendered in a hidden canvas. Once an element is prerendered it can be drawn to the main canvas faster.
@@ -160,17 +159,19 @@ export default class Renderer {
    */
   draw() {
     const { width, height, ctx } = this.world;
-    if (this.absolute) {
-      ctx.drawImage(this.canvas, 0, 0, width, height);
-    } else {
-      const axis = this.isAxis ? this.parent : this.world.axis;
-      ctx.drawImage(
-        this.canvas,
-        -axis.position.x,
-        -axis.position.y,
-        width,
-        height
-      );
+    if (width > 0 && height > 0) {
+      if (this.absolute) {
+        ctx.drawImage(this.canvas, 0, 0, width, height);
+      } else {
+        const axis = this.isAxis ? this.parent : this.world.axis;
+        ctx.drawImage(
+          this.canvas,
+          -axis.position.x,
+          -axis.position.y,
+          width,
+          height
+        );
+      }
     }
   }
 }

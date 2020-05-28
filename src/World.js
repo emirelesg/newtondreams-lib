@@ -3,7 +3,6 @@ import * as constants from './Constants';
 import Scale from './Scale';
 import Axis from './figures/Axis';
 import Renderer from './Renderer';
-// import WorldElement from './WorldElement';
 
 /**
  * The World class handles the canvas and the drawing of elements. It manages all touch and mouse events,
@@ -123,6 +122,12 @@ export default class World {
      * @type {number}
      */
     this.started = null;
+
+    /**
+     * Flag that stops the execution of the drawing loop.
+     * @type {boolean}
+     */
+    this.destroyed = false;
 
     /**
      * Mouse object containing all mouse properties and values.
@@ -295,71 +300,77 @@ export default class World {
   }
 
   /**
+   * Removes all event listeners used by the canvas.
+   * @private
+   */
+  destroy() {
+    this.destroyed = true;
+    this.bindEventListeners(true);
+  }
+
+  /**
    * Binds a callback function to the mouse, touch and resize event listeners.
    * @private
    */
-  bindEventListeners() {
-    const self = this;
+  bindEventListeners(destroy) {
+    const action = destroy ? 'removeEventListener' : 'addEventListener';
     const callbacks = {
       mousemove(e) {
-        self.getMousePosition(e);
-        self.isMouseOverElement();
-        self.moveElements();
-        if (utils.isFunction(self.onMouseMove)) self.onMouseMove();
+        this.getMousePosition(e);
+        this.isMouseOverElement();
+        this.moveElements();
+        if (utils.isFunction(this.onMouseMove)) this.onMouseMove();
       },
       mouseenter(e) {
         e.preventDefault();
-        self.mouse.inCanvas = true;
+        this.mouse.inCanvas = true;
       },
       mouseleave(e) {
         e.preventDefault();
-        self.mouse.inCanvas = false;
+        this.mouse.inCanvas = false;
       },
       mousedown(e) {
         e.preventDefault();
-        self.getMousePosition(e);
-        self.isMouseOverElement();
-        self.mouse.down = true;
-        if (self.mouse.over !== constants.OVER_NOTHING) {
-          self.mouse.dragging = self.elements[self.mouse.over];
+        this.getMousePosition(e);
+        this.isMouseOverElement();
+        this.mouse.down = true;
+        if (this.mouse.over !== constants.OVER_NOTHING) {
+          this.mouse.dragging = this.elements[this.mouse.over];
         }
       },
       mouseup(e) {
         e.preventDefault();
-        self.mouse.down = false;
-        self.moveElements();
+        this.mouse.down = false;
+        this.moveElements();
       },
       touchstart(e) {
-        self.getMousePosition(e);
-        self.isMouseOverElement();
-        self.mouse.down = true;
-        if (self.mouse.over !== constants.OVER_NOTHING) {
+        this.getMousePosition(e);
+        this.isMouseOverElement();
+        this.mouse.down = true;
+        if (this.mouse.over !== constants.OVER_NOTHING) {
           if (e.cancelable) e.preventDefault();
-          self.mouse.dragging = self.elements[self.mouse.over];
-          self.mouse.inCanvas = true;
+          this.mouse.dragging = this.elements[this.mouse.over];
+          this.mouse.inCanvas = true;
         }
       },
       touchend(e) {
-        self.mouse.down = false;
-        if (self.mouse.dragging !== constants.DRAG_NOTHING) {
+        this.mouse.down = false;
+        if (this.mouse.dragging !== constants.DRAG_NOTHING) {
           if (e.cancelable) e.preventDefault();
-          self.mouse.inCanvas = false;
-          self.moveElements();
+          this.mouse.inCanvas = false;
+          this.moveElements();
         }
-      },
-      resize(e) {
-        self.resize(e);
       }
     };
-    window.addEventListener('resize', callbacks.resize, false);
-    window.addEventListener('mouseup', callbacks.mouseup, false);
-    this.canvas.addEventListener('mousemove', callbacks.mousemove, false);
-    this.canvas.addEventListener('mouseenter', callbacks.mouseenter, false);
-    this.canvas.addEventListener('mouseleave', callbacks.mouseleave, false);
-    this.canvas.addEventListener('mousedown', callbacks.mousedown, false);
-    this.canvas.addEventListener('touchmove', callbacks.mousemove, false);
-    this.canvas.addEventListener('touchstart', callbacks.touchstart, false);
-    this.canvas.addEventListener('touchend', callbacks.touchend, false);
+    window[action]('resize', this.resize.bind(this), false);
+    window[action]('mouseup', callbacks.mouseup.bind(this), false);
+    this.canvas[action]('mousemove', callbacks.mousemove.bind(this), false);
+    this.canvas[action]('mouseenter', callbacks.mouseenter.bind(this), false);
+    this.canvas[action]('mouseleave', callbacks.mouseleave.bind(this), false);
+    this.canvas[action]('mousedown', callbacks.mousedown.bind(this), false);
+    this.canvas[action]('touchmove', callbacks.mousemove.bind(this), false);
+    this.canvas[action]('touchstart', callbacks.touchstart.bind(this), false);
+    this.canvas[action]('touchend', callbacks.touchend.bind(this), false);
   }
 
   /**
@@ -441,12 +452,11 @@ export default class World {
     this.ctx.save();
     this.ctx.translate(this.axis.position.x, this.axis.position.y);
     this.elements.sort((a, b) => a.zIndex - b.zIndex);
-    for (let i = 0; i < this.elements.length; i++) {
-      if (utils.isFunction(this.elements[i].draw) && this.elements[i].display)
-        this.elements[i].draw();
-    }
+    this.elements
+      .filter(e => e.display && utils.isFunction(e.draw))
+      .forEach(e => e.draw());
     this.ctx.restore();
-    this.start();
+    if (!this.destroyed) this.start();
   }
 
   /**
@@ -456,16 +466,17 @@ export default class World {
    * @param  {...WorldElement} args Elements to add to the world.
    */
   add(...args) {
-    for (let i = 0; i < args.length; i++) {
-      if (
-        utils.isObject(args[i]) &&
-        Object.prototype.hasOwnProperty.call(args[i], 'valid')
-      ) {
-        args[i].setWorld(this);
-        if (args[i].renderer) args[i].renderer.setWorld(this);
-        this.elements.push(args[i]);
-      }
-    }
+    args
+      .filter(
+        obj =>
+          utils.isObject(obj) &&
+          Object.prototype.hasOwnProperty.call(obj, 'valid')
+      )
+      .forEach(obj => {
+        obj.setWorld(this);
+        if (obj.renderer) obj.renderer.setWorld(this);
+        this.elements.push(obj);
+      });
   }
 
   /**
@@ -489,13 +500,10 @@ export default class World {
    * @private
    */
   start() {
-    const self = this;
     if (this.started === null && utils.isFunction(this.onResize)) {
       this.onResize();
     }
-    this.started = window.requestAnimationFrame(() => {
-      self.draw();
-    });
+    this.started = window.requestAnimationFrame(this.draw.bind(this));
   }
 
   /**
