@@ -1,5 +1,5 @@
-import * as utils from '../Utils';
-import * as constants from '../Constants';
+import * as utils from '../utils/Utils';
+import * as constants from '../utils/Constants';
 import * as dom from './dom';
 
 /**

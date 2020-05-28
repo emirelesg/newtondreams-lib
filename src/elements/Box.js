@@ -1,9 +1,9 @@
-import * as utils from '../Utils';
-import * as constants from '../Constants';
-import WorldElement from '../WorldElement';
-import Text from './box/Box.Text';
-import Graph from './box/Box.Graph';
-import Label from './box/Box.Label';
+import * as utils from '../utils/Utils';
+import * as constants from '../utils/Constants';
+import WorldElement from '../world/WorldElement';
+import Text from './Box.Text';
+import Graph from './Box.Graph';
+import Label from './Box.Label';
 
 /**
  * A Box allows for a window like object to be displayed in the world. This window object

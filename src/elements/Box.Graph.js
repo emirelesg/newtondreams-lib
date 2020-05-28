@@ -1,9 +1,9 @@
-import * as utils from '../../Utils';
-import * as constants from '../../Constants';
-import WorldElement from '../../WorldElement';
-import Scale from '../../Scale';
-import Axis from '../Axis';
-import Plot from '../Plot';
+import * as utils from '../utils/Utils';
+import * as constants from '../utils/Constants';
+import WorldElement from '../world/WorldElement';
+import Scale from '../utils/Scale';
+import Axis from './Axis';
+import Plot from './Plot';
 
 /**
  * A Graph Box allow for {@link Plot} elements to be displayed in the box using a different scale to

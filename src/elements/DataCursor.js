@@ -1,8 +1,8 @@
-import * as utils from '../Utils';
-import * as constants from '../Constants';
-import WorldElement from '../WorldElement';
+import * as utils from '../utils/Utils';
+import * as constants from '../utils/Constants';
+import WorldElement from '../world/WorldElement';
 import Plot from './Plot';
-import Graph from './box/Box.Graph';
+import Graph from './Box.Graph';
 
 /**
  * The DataCursor class is used to add data cursors to plots. It works with plots added to Graph and World objects.

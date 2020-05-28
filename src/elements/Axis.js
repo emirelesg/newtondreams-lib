@@ -1,7 +1,7 @@
-import * as utils from '../Utils';
-import * as constants from '../Constants';
-import WorldElement from '../WorldElement';
-import Renderer from '../Renderer';
+import * as utils from '../utils/Utils';
+import * as constants from '../utils/Constants';
+import WorldElement from '../world/WorldElement';
+import Renderer from '../utils/Renderer';
 
 /**
  * The Axis class is responsible for drawing the axis onto the canvas and setting the new

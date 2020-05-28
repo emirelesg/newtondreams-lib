@@ -1,5 +1,5 @@
-import * as utils from '../Utils';
-import WorldElement from '../WorldElement';
+import * as utils from '../utils/Utils';
+import WorldElement from '../world/WorldElement';
 
 /**
  * The Picture class is used to draw images on the screen. Extra attention must be made when waiting

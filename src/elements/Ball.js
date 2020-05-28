@@ -1,6 +1,6 @@
-import * as utils from '../Utils';
-import * as constants from '../Constants';
-import WorldElement from '../WorldElement';
+import * as utils from '../utils/Utils';
+import * as constants from '../utils/Constants';
+import WorldElement from '../world/WorldElement';
 
 /**
  * The Ball class is a particle class used to draw round particles with the advantage that

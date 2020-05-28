@@ -8,17 +8,6 @@ import * as constants from './Constants';
 export function getPixelRatio() {
   return window.devicePixelRatio || 1;
 }
-// export function getPixelRatio(ctx) {
-//   const devicePixelRatio = window.devicePixelRatio || 1;
-//   const backingStoreRatio =
-//     ctx.webkitBackingStorePixelRatio ||
-//     ctx.mozBackingStorePixelRatio ||
-//     ctx.msBackingStorePixelRatio ||
-//     ctx.oBackingStorePixelRatio ||
-//     ctx.backingStorePixelRatio ||
-//     1;
-//   return devicePixelRatio / backingStoreRatio;
-// }
 
 /**
  * Makes sure that a HTML id allways has a # at the beginning.

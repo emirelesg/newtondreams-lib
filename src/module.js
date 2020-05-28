@@ -1,16 +1,19 @@
-import * as constants from './Constants';
-import * as utils from './Utils';
+import * as constants from './utils/Constants';
+import * as utils from './utils/Utils';
 import * as dom from './dom/dom';
-import World from './World';
+import World from './world/World';
 import Slider from './dom/Slider';
-import Vector from './figures/Vector';
-import Ball from './figures/Ball';
-import Picture from './figures/Picture';
-import Shape from './figures/Shape';
-import Plot from './figures/Plot';
-import Box from './figures/Box';
-import DataCursor from './figures/DataCursor';
+import Vector from './elements/Vector';
+import Ball from './elements/Ball';
+import Picture from './elements/Picture';
+import Shape from './elements/Shape';
+import Plot from './elements/Plot';
+import Box from './elements/Box';
+import DataCursor from './elements/DataCursor';
 
+/**
+ * Main object that can be imported by other programs using es modules.
+ */
 export default {
   ...constants,
   Box,

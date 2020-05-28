@@ -1,6 +1,6 @@
-import * as constants from '../Constants';
-import * as utils from '../Utils';
-import WorldElement from '../WorldElement';
+import * as constants from '../utils/Constants';
+import * as utils from '../utils/Utils';
+import WorldElement from '../world/WorldElement';
 
 /**
  * The Plot class can be used to draw a line plot or a histogram on an axis. It

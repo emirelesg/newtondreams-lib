@@ -1,9 +1,7 @@
 /* eslint-disable class-methods-use-this */
-import * as constants from './Constants';
-import * as utils from './Utils';
-// import World from './World';
-import Font from './Font';
-// import Renderer from './Renderer';
+import * as constants from '../utils/Constants';
+import * as utils from '../utils/Utils';
+import Font from '../utils/Font';
 
 /**
  * Parent class for all elements added to the world. Sets the basic properties

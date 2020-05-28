@@ -1,7 +1,7 @@
-import * as utils from '../Utils';
-import * as constants from '../Constants';
-import Renderer from '../Renderer';
-import WorldElement from '../WorldElement';
+import * as utils from '../utils/Utils';
+import * as constants from '../utils/Constants';
+import Renderer from '../utils/Renderer';
+import WorldElement from '../world/WorldElement';
 
 /**
  * The Shape class is used to draw shapes manually onto the world. The class provides similar

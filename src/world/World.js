@@ -1,8 +1,8 @@
-import * as utils from './Utils';
-import * as constants from './Constants';
-import Scale from './Scale';
-import Axis from './figures/Axis';
-import Renderer from './Renderer';
+import * as utils from '../utils/Utils';
+import * as constants from '../utils/Constants';
+import Scale from '../utils/Scale';
+import Axis from '../elements/Axis';
+import Renderer from '../utils/Renderer';
 
 /**
  * The World class handles the canvas and the drawing of elements. It manages all touch and mouse events,
